@@ -10,7 +10,7 @@ A basic image figure can be created like this:
 <Figure
   src="/images/photo.png"
   caption="This is a caption for the image"
-  width="500px"
+  class="w-full md:w-2/3"
 />
 ```
 
@@ -27,6 +27,20 @@ A basic image figure can be created like this:
 | `progress`  | `Boolean` | `false`   | For videos: show a progress bar below the video     |
 | `color`     | `String`  | `'light'` | Color scheme for the caption and progress bar       |
 
+## Styling with Tailwind
+
+The recommended way to control the size and appearance of the Figure component is using Tailwind classes:
+
+```md
+<Figure
+  src="/images/photo.png"
+  caption="Responsive figure with Tailwind classes"
+  class="w-full sm:w-2/3 lg:w-1/2 mx-auto shadow-md rounded-lg"
+/>
+```
+
+This approach provides more flexibility than fixed widths and better supports responsive design.
+
 ## Video Example
 
 For videos, you can enable autoplay, looping, and progress tracking:
@@ -36,7 +50,7 @@ For videos, you can enable autoplay, looping, and progress tracking:
   type="video"
   src="/videos/demo.mp4"
   caption="Demo video with progress tracking"
-  width="60%"
+  class="w-3/5 mx-auto"
   autostart
   repeat
   progress
@@ -50,17 +64,21 @@ Videos can be toggled between play and pause by clicking on them.
 
 The `color` property accepts any of the [color scheme](/colors) options available in Neversink. This will affect the styling of the caption background and progress bar.
 
-## Using with Tailwind Classes
+## Advanced Positioning
 
-You can apply additional Tailwind classes to customize the Figure component:
+You can combine Tailwind classes with flex or grid layouts for precise positioning:
 
 ```md
-<div class="flex justify-center">
+<div class="flex justify-center items-center gap-4">
   <Figure
-    src="/images/photo.png"
-    caption="Centered image with shadow effect"
-    width="400px"
-    class="shadow-lg"
+    src="/images/photo1.png"
+    caption="Left image"
+    class="w-1/3"
+  />
+  <Figure
+    src="/images/photo2.png"
+    caption="Right image"
+    class="w-1/3"
   />
 </div>
 ```
@@ -73,7 +91,7 @@ Like other components in Neversink, the Figure component can be positioned using
 <Figure
   src="/images/photo.png"
   caption="Draggable figure"
-  width="300px"
+  class="w-64"
   v-drag="[200, 300, 300, 200]"
 />
 ```

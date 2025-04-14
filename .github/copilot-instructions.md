@@ -451,7 +451,7 @@ Display an image with a professional caption:
 <Figure
   src="/images/experiment-results.png"
   caption="Figure 1: Results showing significant improvement in the treatment group (p < 0.01)."
-  width="80%"
+  class="w-4/5"
   color="blue-light"
 />
 ```
@@ -459,10 +459,9 @@ Display an image with a professional caption:
 - **Props**:
   - `src`: The image or video source (required).
   - `caption`: Descriptive text below the image.
-  - `width`: Component width (default: `100%`).
+  - `class`: Tailwind classes for styling (e.g., `w-full`, `w-4/5`, `w-1/2`).
   - `color`: Caption styling using Neversink colors.
   - `type`: Set to `"video"` for video content.
-
 
 #### Example: `StickyNote` Component
 Add a side note:
@@ -562,7 +561,7 @@ align: l-lt-lt
 <Figure
   src="/images/temp-time.png"
   caption="Figure 1: Temperature fluctuations over time during the reaction, showing a sharp increase at the 10-minute mark."
-  width="80%"
+  class="w-4/5"
   color="emerald-light"
 />
 
@@ -679,7 +678,7 @@ color: blue-light
   type="video"
   src="/videos/experiment.mp4"
   caption="Video 1: Demonstration of the experimental procedure for sample preparation."
-  width="70%"
+  class="w-2/3 mx-auto"
   progress
   color="blue-light"
 />
@@ -715,12 +714,12 @@ color: blue-light
 - **Use the Figure Component for Academic Visuals**:
   - Prefer the `Figure` component over plain images for proper academic captioning.
   - Match the `color` property with your slide's color scheme.
-  - For multiple figures on one slide, use consistent widths and a grid layout.
+  - For multiple figures on one slide, use consistent Tailwind classes and a grid layout.
   - Example for multiple figures:
     ```markdown
     <div class="grid grid-cols-2 gap-4">
-      <Figure src="/images/fig1.png" caption="Figure 1: Control group results" width="100%" />
-      <Figure src="/images/fig2.png" caption="Figure 2: Experimental group results" width="100%" />
+      <Figure src="/images/fig1.png" caption="Figure 1: Control group results" class="w-full" />
+      <Figure src="/images/fig2.png" caption="Figure 2: Experimental group results" class="w-full" />
     </div>
     ```
 
