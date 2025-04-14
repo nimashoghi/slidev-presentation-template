@@ -1,439 +1,713 @@
-# Comprehensive Presentation Style Guide for Slidev
+# Comprehensive Slidev Presentation Style Guide with Neversink Theme
 
-## Core Principles
+## Core Principles of Effective Presentations
 
-1. **Clarity First**: Every slide should communicate one clear message
-2. **Visual Hierarchy**: Guide attention through size, color, and placement
-3. **Progressive Disclosure**: Reveal information sequentially to maintain focus
-4. **Text-Visual Balance**: Use text sparingly, let visuals carry the message
-5. **Speaker Notes as Content**: Slides are visual aids, notes contain the full message
+1. **One Message Per Slide**: Each slide should communicate exactly one clear concept
+2. **Visual Hierarchy**: Guide audience attention through deliberate size, color, and placement choices
+3. **Progressive Disclosure**: Reveal information sequentially to maintain focus and build understanding
+4. **Text Minimalism**: Use only essential text, letting visuals carry the narrative burden
+5. **Speaker Notes as Content Repository**: Slides are visual aids, notes hold your complete message
 
-## Important HTML and Markdown Formatting Rules
+## Markdown-First Philosophy
 
-> **CRITICAL:** Do not indent HTML in Slidev markdown files. Unlike regular markdown, indenting HTML in Slidev will completely break the formatting and rendering. Always start HTML tags at the beginning of the line without any spaces or tabs before them.
+Slidev with Neversink thrives on Markdown's simplicity. Prioritize Markdown over HTML:
 
-✅ Correct:
 ```markdown
-<div class="flex">
-<div>First column</div>
-<div>Second column</div>
+# Findings from Experiment 3
+
+- Success rate increased by **42%** compared to baseline
+- Error variance decreased significantly (*p < 0.01*)
+- System maintained stability across all test conditions
+```
+
+Reserve HTML for specialized layout needs only:
+
+```markdown
+<div class="flex justify-between">
+<div>Left side content</div>
+<div>Right side content</div>
 </div>
 ```
 
-❌ Incorrect:
+> **CRITICAL:** Never indent HTML in Slidev markdown files. Always start HTML tags flush left (no spaces/tabs before tags).
+
+## Structuring Your Presentation
+
+### Establishing the Presentation
+
 ```markdown
-<div class="flex">
-  <div>First column</div>
-  <div>Second column</div>
-</div>
+---
+theme: neversink
+neversink_slug: 'Neural Networks in Medical Imaging'
+---
+
+# Deep Learning Approaches for Medical Image Analysis
+Dr. Jane Researcher | University Medical Center
+
+---
 ```
 
-This applies to all HTML tags within Slidev markdown, including animation wrappers like `<v-click>`, layout containers, and styling elements.
+### Narrative Flow Organization
 
-## Slidev Technical Foundation
+Structure your presentation with a clear throughline:
 
-### Basic Structure
+1. **Opening**: Problem statement and motivation (cover layout)
+2. **Background**: Contextual information (section layout + default layouts)
+3. **Approach**: Your methods (two-column layouts)
+4. **Results**: Your findings (side-title layouts with visualizations)
+5. **Discussion**: Implications (quote layout for key takeaways)
+6. **Conclusion**: Summary and next steps (section layout)
+
+## Neversink Layouts Mastery
+
+Neversink offers specialized layouts that enhance visual communication:
+
+### Title Slide (Cover Layout)
 
 ```markdown
 ---
-# This is frontmatter for the presentation
-theme: default
-background: https://source.unsplash.com/collection/94734566/1920x1080
-class: text-center
+layout: cover
+color: navy
 ---
 
-# Presentation Title
-Subtitle information
+# Quantum Computing Applications in Drug Discovery
+**Dr. Alex Chen** | Molecular Systems Lab
 
+:: note ::
+
+This presentation covers our 3-year research program on quantum computing applications
+in pharmaceutical research, highlighting three breakthrough algorithms.
+```
+
+### Standard Content (Default Layout)
+
+```markdown
+---
+layout: default
+color: blue-light
 ---
 
-# Second Slide Title
-Content for second slide
+# Challenges in Current Approaches
+
+- Classical algorithms struggle with protein folding simulations
+- Exponential complexity limits molecular docking calculations
+- Accuracy-performance tradeoff restricts practical applications
 
 <!--
-Speaker notes go here.
-[click] Click markers sync with animations.
+[click] Classical algorithms can only model simple proteins efficiently
+[click] Even supercomputers require weeks for complex molecular docking
+[click] Industry currently sacrifices accuracy for speed in drug screening
 -->
 ```
 
-### Slide Separation and Organization
-- Separate slides with `---` on its own line
-- Start each slide with a clear `# Title`
-- Group related slides with consistent styling
-
-### Layouts
+### Two-Column Comparison (Two-Cols-Title Layout)
 
 ```markdown
 ---
-layout: two-cols
+layout: two-cols-title
+columns: is-5
+align: c-lt-lt
+color: teal-light
 ---
 
-# Left Column
-Content
+:: title ::
 
-::right::
+# Classical vs. Quantum Approaches
 
-# Right Column
-Content
+:: left ::
+
+## Classical Computing
+- Sequential processing
+- Binary bit-based
+- Deterministic algorithms
+- O(2^n) complexity scaling
+- Limited by Moore's Law
+
+:: right ::
+
+## Quantum Computing
+- Parallel processing
+- Quantum bit (qubit) based
+- Probabilistic algorithms
+- O(n) potential scaling
+- Limited by coherence time
 ```
 
-Common layouts:
-- `default`: Standard slide
-- `cover`: Title slide
-- `two-cols`: Two column layout
-- `section`: Section divider
-- `image-right`: Text left, image right
-- `quote`: Centered quote
-
-### Speaker Notes
+### Side-Anchored Title (Side-Title Layout)
 
 ```markdown
-# Slide Title
-Content
+---
+layout: side-title
+color: purple
+titlewidth: is-4
+side: l
+align: rm-lt
+---
 
-<!--
-Detailed speaker notes here.
-[click] Notes after this marker appear when animation triggers.
-[click:3] This appears at the third click.
--->
+:: title ::
+
+# Key Results
+
+:: content ::
+
+Our quantum algorithm demonstrated:
+
+- **100x** speed improvement for molecular docking
+- **32%** increased accuracy in binding predictions
+- Feasible simulation of compounds with **>200 atoms**
+- Linear scaling with molecular complexity
+
+![Results Comparison](/images/quantum-speedup-graph.png)
 ```
 
-## Animation System
-
-### Basic Animations
+### Section Divider
 
 ```markdown
-<v-click>
-Content revealed on click
-</v-click>
+---
+layout: section
+color: indigo
+---
 
-<!-- Or as a directive -->
-<div v-click>Content revealed on click</div>
-
-<!-- Sequential list items -->
-<v-clicks>
-- First point
-- Second point
-- Third point
-</v-clicks>
+# Quantum Algorithm Design
+Building computational advantage through entanglement
 ```
 
-### Advanced Animations
+### Quote Highlight
 
 ```markdown
-<!-- Show and hide by click index -->
-<div v-click="[2, 4]">Appears on click 2, disappears on click 4</div>
+---
+layout: quote
+color: sky-light
+author: "Dr. Richard Feynman"
+---
 
-<!-- Relative positioning -->
-<div v-click>First</div>
-<div v-click="+2">Appears after two more clicks</div>
-
-<!-- Immediate follow-up -->
-<div v-click>This appears first</div>
-<div v-after>This appears together with the previous element</div>
+"Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical."
 ```
 
-### Code Block Animations
+### Top Title with Two Columns
 
 ```markdown
-```js {1|2-3|all}
-function example() {
-  const a = 1
-  const b = 2
-  return a + b
-}
+---
+layout: top-title-two-cols
+columns: is-6
+align: l-lt-lt
+color: amber-light
+---
+
+:: title ::
+
+# Implementation Challenges
+
+:: left ::
+
+## Technical Barriers
+- Quantum decoherence
+- Error correction overhead
+- Limited qubit connectivity
+- Temperature requirements
+
+:: right ::
+
+## Our Solutions
+- Noise-resilient algorithm design
+- Hybrid classical-quantum approach
+- Optimized circuit depth
+- Strategic qubit allocation
 ```
-```
 
-## Visual Design Principles
-
-### Color Usage
-
-1. **Limited Palette**: 3-5 colors maximum
-   - Primary: Main brand/theme color
-   - Secondary: Complementary color for emphasis
-   - Neutral: Grays for background/supporting elements
-   - Accent: Highlights for important points
-
-2. **Consistent Application**:
-   - Titles: Primary color
-   - Important points: Secondary or accent
-   - Background: Subtle neutral shade
-   - Data visualization: Consistent color mapping
-
-3. **Contrast for Readability**:
-   - Text must have 4.5:1 contrast ratio with background
-   - Use Tailwind classes like `text-gray-900 bg-gray-100`
-
-### Typography
-
-1. **Hierarchy Through Type**:
-   - Slide titles: 32-40px
-   - Main points: 24-28px
-   - Supporting text: 18-22px
-   - Labels/captions: 14-16px
-
-2. **Font Pairing**:
-   - Headers: Sans-serif for clarity (Montserrat, Roboto, Inter)
-   - Body: Sans-serif for screen readability
-   - Max two font families per presentation
-
-3. **Text Formatting**:
-   - Use bold for emphasis instead of italics or underline
-   - Maintain consistent alignment (left-aligned typically best)
-   - Limit line length to 40-60 characters
-
-### Spatial Organization
-
-1. **White Space**:
-   - Margins: Consistent spacing from slide edges (5-10% of slide)
-   - Padding: Space between elements (min 20px)
-   - Breathing room: Don't crowd elements
-
-2. **Grid System**:
-   ```markdown
-<div class="grid grid-cols-2 gap-4">
-<div>Left content</div>
-<div>Right content</div>
-</div>
-   ```
-
-3. **Visual Balance**:
-   - Distribute visual weight evenly
-   - Use the rule of thirds for key element placement
-   - Align elements to create order (left/center/right)
-
-## Content Development
-
-### Slide Types and Usage
-
-1. **Title Slide**:
-   - Project name, team, date
-   - Visual that represents the core concept
-   - Keep minimal, make memorable
-
-2. **Problem/Challenge Slide**:
-   - Clear statement of problem
-   - Key statistics or evidence
-   - Visual representation of challenge
-
-3. **Approach/Method Slide**:
-   - Visual framework/diagram
-   - Step-by-step process revealed progressively
-   - Limited technical detail (keep in notes)
-
-4. **Results/Data Slide**:
-   - One key finding per slide
-   - Clean data visualization
-   - Insight first, then supporting data
-
-5. **Conclusion Slide**:
-   - Restate key message
-   - Clear takeaway or next step
-   - Visual that reinforces main point
-
-### Progressive Disclosure Strategies
-
-1. **Conceptual Progression**:
-   - Start with familiar concepts
-   - Build to more complex ideas
-   - Use animations to add detail incrementally
-
-2. **Information Layering**:
-   - Core message visible immediately
-   - Supporting details revealed on click
-   - Contextual elements last
-
-3. **Synchronized Narration**:
-   ```markdown
-<v-clicks>
-- Initial concept
-- Building detail
-- Final insight
-</v-clicks>
-
-<!--
-I'll start by explaining the basic concept.
-[click] Then, I'll add how this works in practice.
-[click] Finally, I'll reveal why this matters for our project.
--->
-   ```
-
-### Visual Elements
-
-1. **Diagrams & Icons**:
-   - Use simple, meaningful icons
-   - Create diagrams with clear visual hierarchy
-   - Animate complex diagrams to build understanding
-
-2. **Images**:
-   - High-quality, relevant images
-   - Crop to focus on key elements
-   - Consider consistency in style across slides
-
-3. **Data Visualization**:
-   - Choose appropriate chart type for data
-   - Minimize non-data ink
-   - Highlight key insights visually
-
-## Advanced Slidev Features
-
-### Embedding Components
+### Full Layout for Complex Visuals
 
 ```markdown
-<Tweet id="1390115482657726468" />
-
-<div class="flex justify-center">
-<img src="/images/diagram.png" class="h-60" />
-</div>
-```
-
-### Using Tailwind Classes
-
-Common useful classes:
-- Layout: `flex`, `grid`, `items-center`, `justify-between`
-- Spacing: `p-4`, `m-2`, `gap-6`, `space-y-3`
-- Typography: `text-xl`, `font-bold`, `text-blue-700`
-- Decoration: `rounded-lg`, `shadow`, `border`
-- Effects: `hover:scale-105`, `transition-all`
-
-Example:
-```markdown
-<div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg shadow">
-<div class="text-xl font-bold text-blue-800">Key Point</div>
-<img src="/icon.png" class="h-10 w-10" />
-</div>
-```
-
-### Responsive Design
-
-- Use relative sizing: `h-1/2`, `w-full`, `text-lg`
-- Conditional classes: `sm:hidden lg:flex`
-- Aspect ratio: `aspect-video`, `aspect-square`
-
-```markdown
-<div class="h-40 md:h-60 lg:h-80 w-full bg-gray-100 rounded">
-Responsive container
-</div>
-```
-
-## Case Studies & Examples
-
-### Problem Statement Slide
-
-```markdown
-# Why Materials Discovery Matters
+---
+layout: full
+---
 
 <div class="grid grid-cols-2 gap-4">
 <div>
-<v-clicks>
 
-- **Every technology starts with a material**
-  - But discovery takes 20+ years lab-to-market
+## Quantum Circuit Design
+![Circuit Diagram](/images/quantum-circuit.png)
 
-- **Finding the needle in a 10²⁰ haystack**
-  - Only ~1 in 100,000 structures are stable
-  - Vast combinatorial space to explore
-
-- **Generative ML: The "Virtual Lab"**
-  - AI trained on known stable structures
-  - Generates novel, physically realistic candidates
-
-</v-clicks>
 </div>
+<div>
 
-<div class="flex items-center justify-center">
-<img v-click src="/crystal-structure.png" class="h-60 rounded shadow" />
+## Resulting Energy Landscape
+![Energy Graph](/images/energy-landscape.png)
+
 </div>
 </div>
-
-<!--
-Let's understand why materials discovery is so important and challenging.
-
-[click] Every technology we rely on starts with a material discovery. But traditionally, bringing a new material from lab to market takes over 20 years.
-
-[click] The challenge is finding viable materials in an astronomically large search space. With about 10²⁰ possible materials, only about 1 in 100,000 are stable enough to synthesize.
-
-[click] Generative machine learning becomes our "virtual lab" by training AI on known stable materials to generate novel candidates with higher stability probability.
-
-[click] This visualization shows a crystal structure - the type of 3D arrangement our models are trying to generate.
--->
 ```
 
-### Data Visualization Slide
+## Color Psychology and the Neversink Color System
+
+Neversink's color schemes convey meaning:
+
+- **Blues (blue, sky, cyan)**: Trust, stability, data-focused content
+- **Greens (green, emerald, teal)**: Growth, success, positive results
+- **Reds/Oranges (red, orange, amber)**: Warnings, problems, challenges
+- **Purples (purple, violet, indigo)**: Creativity, innovation, theory
+- **Neutrals (white, light, dark, black)**: Foundational information
+
+Apply color consistently across related slides:
 
 ```markdown
-# Performance Comparison
+---
+layout: section
+color: red
+---
 
+# Challenges and Limitations
+
+---
+
+layout: default
+color: red-light
+---
+
+# Four Key Challenges
+
+1. Limited quantum coherence time
+2. Noise contamination in measurements
+3. Circuit depth constraints
+4. Scaling issues beyond 100 qubits
+```
+
+## Animation and Progressive Disclosure
+
+Reveal information strategically to control narrative:
+
+### Bullet Point Animation
+
+```markdown
+# Key Findings
+
+<v-clicks>
+
+- Quantum approach shows exponential speedup
+- Error rates remain within acceptable bounds
+- System scales linearly with problem size
+- Method generalizes to other molecular systems
+
+</v-clicks>
+```
+
+### Grouped Revelations
+
+```markdown
+<v-clicks>
+
+## Algorithm Performance
+- Maintains coherence through 20 quantum gates
+- Achieves 95% fidelity in final results
+
+</v-clicks>
+
+<v-clicks>
+
+## Practical Implications
+- Enables drug discovery for previously intractable targets
+- Reduces screening time from months to days
+
+</v-clicks>
+```
+
+### Code Walkthrough
+
+````markdown
+```python {1-2|4-6|8-10|all}
+import qiskit
+from qiskit import QuantumCircuit, execute, Aer
+
+# Create quantum circuit with 3 qubits
+circuit = QuantumCircuit(3, 3)
+circuit.h(0)  # Hadamard gate on qubit 0
+
+# Create entanglement between qubits
+circuit.cx(0, 1)  # CNOT with control=0, target=1
+circuit.cx(0, 2)  # CNOT with control=0, target=2
+```
+````
+
+## Neversink Components for Visual Enhancement
+
+### Admonitions for Important Points
+
+```markdown
+<AdmonitionType type="important" width="90%">
+
+Our quantum algorithm requires at least 20 qubits with >99% gate fidelity to demonstrate advantage over classical methods.
+
+</AdmonitionType>
+```
+
+### Speech Bubbles for Commentary
+
+```markdown
+<SpeechBubble position="r" color="cyan" shape="round" maxWidth="300px">
+
+This unexpected phase transition occurs only in the quantum regime and has no classical analogue.
+
+</SpeechBubble>
+```
+
+### Sticky Notes for Supplementary Information
+
+```markdown
+<StickyNote color="amber-light" textAlign="left" width="200px" title="Historical Note">
+
+Feynman first proposed quantum computers specifically to simulate quantum physics in 1982.
+
+</StickyNote>
+```
+
+### QR Codes for Resources
+
+```markdown
+<div class="flex justify-between items-center">
+<div>
+
+## Access Our Dataset
+Scan to download complete experimental results and code repository
+
+</div>
+<QRCode value="https://github.com/your-repo/quantum-drug-discovery" :size="200" />
+</div>
+```
+
+## Typography Best Practices
+
+### Hierarchy Through Type
+
+- **Slide Titles**: 32-40px (Default Neversink h1)
+- **Section Headers**: 24-28px (Default Neversink h2)
+- **Body Text**: 18-22px (Default Neversink paragraph)
+- **Captions/Notes**: 14-16px (Use smaller text classes)
+
+```markdown
+# Primary Title
+
+## Secondary Heading
+
+Regular body text appears at this size.
+
+<div class="text-sm">Smaller text for references or technical details</div>
+```
+
+### Highlighting Key Text
+
+```markdown
+This approach works in standard conditions, but ==fails dramatically in edge cases== where quantum effects dominate.
+```
+
+## Visual Design Principles for Academic Presentations
+
+### Data Visualization
+
+Present data clearly and honestly:
+
+```markdown
 <div class="flex justify-center">
 <div class="w-4/5">
-<img v-click src="/comparison-chart.png" class="w-full" />
+<img v-click src="/algorithm-comparison.png" class="w-full" />
 </div>
 </div>
 
 <div class="grid grid-cols-3 gap-4 mt-4">
 <div v-click class="bg-green-50 p-2 rounded text-center">
-<div class="text-xl font-bold text-green-700">95%</div>
-<div class="text-sm">Validity</div>
+<div class="text-xl font-bold text-green-700">99.3%</div>
+<div class="text-sm">Accuracy</div>
 </div>
 <div v-click class="bg-blue-50 p-2 rounded text-center">
-<div class="text-xl font-bold text-blue-700">87%</div>
-<div class="text-sm">Coverage</div>
-</div>
-<div v-click class="bg-purple-50 p-2 rounded text-center">
-<div class="text-xl font-bold text-purple-700">2.3x</div>
+<div class="text-xl font-bold text-blue-700">100x</div>
 <div class="text-sm">Speed Improvement</div>
 </div>
+<div v-click class="bg-purple-50 p-2 rounded text-center">
+<div class="text-xl font-bold text-purple-700">5x</div>
+<div class="text-sm">Energy Efficiency</div>
+</div>
+</div>
+```
+
+### White Space
+
+Embrace emptiness for clarity:
+
+```markdown
+---
+layout: default
+color: light
+---
+
+<div class="py-10">
+
+# Simplicity Enhances Comprehension
+
+Our most important finding is that quantum algorithms provide exponential speedup for molecular simulations.
+
+</div>
+```
+
+### Rule of Thirds
+
+Position key elements at natural focus points:
+
+```markdown
+---
+layout: full
+---
+
+<div class="grid grid-cols-3 grid-rows-3 h-full">
+<div class="col-span-2 row-span-2">
+<img src="/main-diagram.png" class="h-full w-full object-contain" />
+</div>
+<div class="col-start-3 row-start-1">
+<h2>Key Components</h2>
+</div>
+<div class="col-start-3 row-start-2">
+
+- Entanglement generator
+- Error correction module
+- Measurement system
+
+</div>
+<div class="col-start-1 col-span-3 row-start-3">
+<p class="text-center pt-4">Our architecture integrates these components to achieve quantum advantage</p>
+</div>
+</div>
+```
+
+## Practical Slide Patterns for Academic Presentations
+
+### Problem Statement Slide
+
+```markdown
+---
+layout: default
+color: red-light
+---
+
+# The Molecular Docking Challenge
+
+<div class="grid grid-cols-2 gap-4">
+<div>
+<v-clicks>
+
+- Drug discovery requires evaluating billions of molecular interactions
+- Classical algorithms scale exponentially with molecule size
+- Current approaches limited to ~100 atom systems
+- Industry relies on severe approximations
+
+</v-clicks>
 </div>
 
-<!--
-Let's look at how our different models performed.
-
-[click] This chart shows the performance across our key metrics. Notice how CDVAE (in blue) consistently outperforms other approaches.
-
-[click] Our top model achieved 95% validity, meaning nearly all generated structures were physically plausible.
-
-[click] We also reached 87% coverage of the test set, indicating our model generates diverse and realistic candidates.
-
-[click] Finally, we observed a 2.3x speed improvement over previous state-of-the-art approaches.
--->
+<div class="flex items-center justify-center">
+<img v-click src="/molecular-complexity.png" class="h-60 rounded shadow" />
+</div>
+</div>
 ```
+
+### Methods Slide
+
+```markdown
+---
+layout: top-title-two-cols
+columns: is-4
+align: l-lt-lt
+color: blue-light
+---
+
+:: title ::
+
+# Quantum Phase Estimation Approach
+
+:: left ::
+
+## Core Algorithm Steps
+<v-clicks>
+
+1. Initialize quantum register to reference state
+2. Apply molecular Hamiltonian evolution
+3. Perform quantum Fourier transform
+4. Measure energy eigenvalues
+5. Post-process results classically
+
+</v-clicks>
+
+:: right ::
+
+<div class="flex justify-center items-center h-full">
+<img src="/circuit-diagram.png" class="max-h-80 max-w-full" />
+</div>
+```
+
+### Results Comparison Slide
+
+```markdown
+---
+layout: side-title
+color: green
+titlewidth: is-3
+side: l
+align: rm-lt
+---
+
+:: title ::
+
+# Performance Comparison
+
+:: content ::
+
+<div class="grid grid-cols-2 gap-8">
+<div>
+
+## Classical Approach
+- Processing time: 72 hours
+- Accuracy: 76%
+- Energy resolution: ±0.5 kcal/mol
+- Max molecule size: 100 atoms
+
+</div>
+<div>
+
+## Our Quantum Approach
+- Processing time: 45 minutes
+- Accuracy: 94%
+- Energy resolution: ±0.1 kcal/mol
+- Max molecule size: 300 atoms
+
+</div>
+</div>
+
+<div class="pt-8">
+<img src="/performance-graph.png" class="w-4/5 mx-auto" />
+</div>
+```
+
+### Implications/Discussion Slide
+
+```markdown
+---
+layout: quote
+color: purple-light
+quotesize: text-xl
+authorsize: text-lg
+---
+
+<div class="py-4">
+
+"Our quantum approach fundamentally changes what's possible in computational drug discovery, potentially reducing development timelines from years to months."
+
+</div>
+
+<div class="pt-4 text-right">
+<AdmonitionType type="tip" width="60%" class="ml-auto">
+
+This could enable targeting of previously "undruggable" proteins associated with major diseases.
+
+</AdmonitionType>
+</div>
+```
+
+### Future Work/Conclusion Slide
+
+```markdown
+---
+layout: default
+color: indigo-light
+---
+
+# Future Directions
+
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-white bg-opacity-50 p-4 rounded-lg shadow">
+<h3 class="text-indigo-700 mb-2">Hardware Scaling</h3>
+Extend to 100+ qubit systems with improved coherence times
+</div>
+
+<div class="bg-white bg-opacity-50 p-4 rounded-lg shadow">
+<h3 class="text-indigo-700 mb-2">Algorithm Refinement</h3>
+Optimize circuit depth and error mitigation techniques
+</div>
+
+<div class="bg-white bg-opacity-50 p-4 rounded-lg shadow">
+<h3 class="text-indigo-700 mb-2">Clinical Applications</h3>
+Partner with pharmaceutical companies for real-world testing
+</div>
+</div>
+
+<div class="mt-8 text-center">
+<QRCode value="https://example.com/contact" :size="120" class="inline-block" />
+<p class="mt-2">Scan to collaborate with our team</p>
+</div>
+```
+
+## Advanced Slidev Techniques
+
+### Custom Component Positioning
+
+```markdown
+---
+layout: full
+---
+
+<StickyNote color="blue-light" width="200px" v-drag="[150,120,200,150]">
+This interaction is key to quantum advantage
+</StickyNote>
+
+<ArrowDraw color="red" v-drag="[350,250,200,100]"/>
+
+<div class="flex justify-center items-center h-full">
+<img src="/complex-diagram.png" class="max-h-80 max-w-full" />
+</div>
+```
+
+### Tailwind Utility Classes for Layout
+
+```markdown
+<div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg shadow">
+<div class="text-xl font-bold text-blue-800">Key Finding</div>
+<div class="text-4xl">→</div>
+<div>Quantum systems provide exponential speedup</div>
+</div>
+```
+
+Common useful Tailwind classes in Neversink:
+- Flexbox: `flex`, `justify-between`, `items-center`
+- Grid: `grid`, `grid-cols-2`, `gap-4`
+- Spacing: `p-4`, `mt-8`, `mb-2`
+- Styling: `rounded-lg`, `shadow`, `bg-opacity-50`
 
 ## Common Pitfalls and Solutions
 
 1. **Overcrowded Slides**
-   - Solution: Break into multiple slides
-   - Rule: Max 3-5 bullet points per slide
+   - Solution: Split content across multiple slides
+   - Rule: Max 5 bullet points per slide, 25 words per bullet
 
-2. **Text-Heavy Content**
-   - Solution: Convert to visuals, put details in notes
-   - Rule: 6x6 (max 6 words per line, 6 lines per slide)
+2. **Text-Heavy Presentation**
+   - Solution: Convert text to visuals, diagrams, and icons
+   - Rule: If you're reading directly from slides, redesign them
 
-3. **Inconsistent Styling**
-   - Solution: Create template slides first
-   - Rule: Define color, font, spacing system before content
+3. **Inconsistent Design**
+   - Solution: Use consistent layouts for similar content types
+   - Rule: Define color scheme and layout patterns before creating content
 
 4. **Poor Contrast**
-   - Solution: Use Tailwind's color system (avoid light-on-light)
-   - Rule: Test slides in actual presentation environment
+   - Solution: Use Neversink's paired color schemes
+   - Rule: Test readability by viewing slides from 10 feet away
 
-5. **Complex Animations**
-   - Solution: Use animations purposefully, not decoratively
-   - Rule: Each animation should reveal meaningful information
-
-6. **HTML Indentation**
-   - Solution: Never indent HTML in Slidev markdown files
-   - Rule: Place all HTML tags flush left (no spaces/tabs before tags)
+5. **Gratuitous Animations**
+   - Solution: Use animations purposefully to reveal logical progression
+   - Rule: Animations should reveal meaningful information, not distract
 
 ## Conclusion
 
-Creating effective presentations is both art and science. The best slides:
+Effective presentations with Slidev and Neversink combine:
 
-1. Support rather than replace the speaker
-2. Progressively disclose information
-3. Use visuals strategically
-4. Maintain consistent visual language
-5. Respect audience cognitive load
-6. Follow proper HTML formatting (no indentation)
+1. **Clear content strategy**: One message per slide, logical flow throughout
+2. **Visual design principles**: Hierarchy, contrast, white space, rule of thirds
+3. **Neversink's layout system**: Leverage purpose-built layouts for different content types
+4. **Progressive disclosure**: Reveal information in a measured, logical sequence
+5. **Markdown-first approach**: Keep slides clean and maintainable
+6. **Visual components**: Enhance with Neversink components for emphasis and clarity
 
-Slidev provides powerful tools to implement these principles through markdown-based slides, tailwind styling, and animation capabilities. By combining technical features with solid design principles, you can create presentations that are both visually compelling and intellectually engaging.
+Remember that slides support your presentation—they are not the presentation itself. Design them to complement and enhance your spoken narrative, not replace it.
