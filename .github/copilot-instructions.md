@@ -1,436 +1,557 @@
-# Comprehensive Slidev Presentation Style Guide with Neversink Theme
+# Slidev Presentation Style Guide
 
-## Core Principles of Effective Presentations
+This style guide is designed to help academics create effective and visually appealing presentations using Slidev with the Neversink theme. It covers best practices for structuring slides, utilizing Markdown, and leveraging Neversink’s features to enhance your academic presentations.
 
-1. **One Message Per Slide**: Each slide should communicate exactly one clear concept
-2. **Visual Hierarchy**: Guide audience attention through deliberate size, color, and placement choices
-3. **Progressive Disclosure**: Reveal information sequentially to maintain focus and build understanding
-4. **Text Minimalism**: Use only essential text, letting visuals carry the narrative burden
-5. **Speaker Notes as Content Repository**: Slides are visual aids, notes hold your complete message
+## 0. Outline
 
-## Markdown-First Philosophy
+### 1. Introduction
+- Purpose of the style guide: To assist academics in crafting effective Slidev presentations using the Neversink theme.
+- Benefits of using Markdown with Slidev and Neversink:
+   - Simplicity and speed of writing, allowing focus on content.
+   - Beautiful, academic-friendly layouts that integrate seamlessly with Markdown.
+   - Consistency through predefined layouts and components.
+   - Ease of version control and collaboration.
 
-Slidev with Neversink thrives on Markdown's simplicity. Prioritize Markdown over HTML:
+### 2. Core Principles for Effective Slides
+- **Clarity**: Communicate one clear message per slide, supported by Markdown’s simplicity.
+- **Visual Hierarchy**: Use Markdown headings and lists to guide attention.
+- **Progressive Disclosure**: Reveal content sequentially with Slidev directives in Markdown.
+- **Text-Visual Balance**: Pair concise Markdown text with Neversink’s visual layouts.
+- **Speaker Notes**: Use Markdown-compatible comments (`<!-- -->`) for detailed notes.
+- How Neversink enhances these principles through its features.
 
-```markdown
-# Findings from Experiment 3
+### 3. Setting Up Your Slidev Presentation with Neversink
+- Basic structure of a Slidev Markdown file:
+   - Frontmatter setup with Neversink theme and layouts.
+   - Slide separation with `---`.
+- Using Neversink’s layouts via frontmatter (e.g., `layout: cover`, `color: teal-light`).
+- Key rule: Avoid indenting HTML in Markdown files to ensure proper rendering (minimize HTML usage).
 
-- Success rate increased by **42%** compared to baseline
-- Error variance decreased significantly (*p < 0.01*)
-- System maintained stability across all test conditions
-```
+### 4. Creating Slides with Markdown and Neversink
+- Writing content using Markdown syntax:
+   - Headings (`#`, `##`), bold (`**`), italic (`*`), inline code (```), links (`[text](url)`).
+   - Lists (bullet `-`, numbered `1.`), images (`![alt](url)`), code blocks (``` ```).
+   - Equations (`$x^2$` inline, `$$x^2$$` display), tables, quotes (`>`).
+   - Highlighting text with `==text==` (Neversink’s `markdown-it-mark` feature).
+- Structuring content with Neversink layouts and slots (e.g., `::left::`, `::right::`).
+- Applying visual design:
+   - Selecting layouts (e.g., `two-cols-title`, `quote`) via frontmatter.
+   - Using Neversink’s color schemes (e.g., `color: emerald-light`) in frontmatter.
 
-Reserve HTML for specialized layout needs only:
+### 5. Animations and Interactivity
+- Using Slidev’s Markdown-compatible directives:
+   - `<v-click>` for single reveals (e.g., `<v-click>` around Markdown content).
+   - `<v-clicks>` for list items (e.g., `- Item` within `<v-clicks>`).
+- Animating code blocks with line highlights (e.g., ```js {1|2-3|all} ```).
+- Keeping animations purposeful to enhance academic content delivery.
 
-```markdown
-<div class="flex justify-between">
-<div>Left side content</div>
-<div>Right side content</div>
-</div>
-```
+### 6. Advanced Features: Neversink Components
+- Overview of Neversink components (e.g., `Admonition`, `StickyNote`, `QRCode`).
+- Including components in Markdown:
+   - Syntax and props (e.g., `<Admonition title="Note" color="teal-light">`).
+   - Combining with Markdown content for annotations or emphasis.
+- Minimizing HTML by relying on component simplicity and readability.
 
-> **CRITICAL:** Never indent HTML in Slidev markdown files. Always start HTML tags flush left (no spaces/tabs before tags).
+### 7. Examples and Best Practices
+- Sample slides for academic content:
+   - Title slide with author and affiliation (`layout: cover`).
+   - Figure slide with caption (`layout: full` or `two-cols-title`).
+   - Table slide (`layout: default` with Markdown table).
+   - Equation slide (`layout: default` with LaTeX).
+   - Quote slide (`layout: quote`).
+   - Progressive disclosure slide (`<v-clicks>` with bullet points).
+- Tips for effective use:
+   - Leveraging Neversink layouts for consistency.
+   - Formatting citations with Markdown or minimal HTML.
 
-## Structuring Your Presentation
+### 8. Common Pitfalls and Solutions
+- **Overusing HTML**: Prefer Markdown; use HTML only for complex layouts with Tailwind classes.
+- **Indentation Errors**: Keep HTML flush left if used, but prioritize Markdown.
+- **Inconsistent Design**: Stick to Neversink layouts for uniformity.
+- **Neglecting Notes**: Include detailed speaker notes in `<!-- -->`.
+- Solutions: Preview slides, use layouts effectively, and maintain Markdown focus.
 
-### Establishing the Presentation
+## 1. Introduction
 
+This style guide is crafted to assist academics in developing impactful and polished presentations using Slidev with the Neversink theme. Slidev is an innovative, open-source tool that empowers users to author slide decks using Markdown, blending the ease of text-based editing with the versatility of web-based technologies. The Neversink theme builds on this foundation by offering layouts, components, and styling options specifically designed for academic purposes—such as research seminars, classroom lectures, and conference talks.
+
+The primary goal of this guide is to equip you with the knowledge and techniques to:
+- Harness Markdown’s simplicity to streamline content creation and editing.
+- Utilize Neversink’s thoughtfully designed layouts and features to produce visually consistent and engaging slides.
+- Implement best practices for academic presentations, ensuring your slides are clear, well-structured, and audience-friendly.
+
+### Why Use Slidev with Neversink?
+Adopting Slidev with the Neversink theme offers several advantages tailored to the needs of academics:
+
+- **Simplicity and Efficiency**: Markdown’s lightweight syntax allows you to focus on your content rather than wrestling with intricate formatting or code. This is particularly beneficial for academics who often need to revise and refine their material quickly.
+- **Professional, Academic-Oriented Design**: Neversink provides a suite of layouts—like title slides, two-column text-and-figure combinations, and quotation highlights—that cater to scholarly content, ensuring your presentations look polished and cohesive.
+- **Uniformity Across Slides**: With Neversink’s predefined typography, color schemes, and components, your presentation maintains a consistent aesthetic, enhancing its professional appeal.
+- **Collaboration Made Easy**: Markdown files are plain text, making them ideal for version control systems (e.g., Git) and collaborative workflows with colleagues or co-authors.
+- **Content-Centric Workflow**: By reducing reliance on manual HTML or CSS tweaks, Slidev and Neversink let you prioritize your message over presentation mechanics.
+
+This guide will walk you through the core principles of effective slide design and demonstrate how to apply them using Markdown and Neversink’s features. Whether you’re new to Slidev or seeking to elevate your presentation game, these sections will provide a solid foundation for creating compelling academic slide decks.
+
+---
+
+## 2. Core Principles for Effective Slides
+
+Designing effective slides requires balancing clarity, structure, and engagement to support your spoken narrative. Below are five key principles to guide your slide creation, each enhanced by Markdown’s simplicity and Neversink’s design capabilities.
+
+### 1. **Clarity**
+- **What It Means**: Each slide should convey a single, unambiguous idea or takeaway.
+- **Markdown’s Contribution**: The minimal syntax of Markdown (e.g., headings with `#`, bullet points with `-`) encourages concise, focused content, stripping away unnecessary clutter.
+- **Neversink’s Support**: Layouts like `default` and `quote` are optimized for presenting one central idea—whether it’s a key finding or a memorable statement—making it easy for your audience to follow.
+
+### 2. **Visual Hierarchy**
+- **What It Means**: Arrange content to direct the viewer’s eye logically, using size, color, and layout.
+- **Markdown’s Contribution**: Headings (`#` for titles, `##` for subtitles) and lists (e.g., `- Item`) naturally establish structure. Emphasis with `**bold**` or `*italic*` highlights critical points.
+- **Neversink’s Support**: The theme’s typography and monochromatic color options (e.g., `teal-light`, `navy`) reinforce hierarchy. Layouts like `two-cols-title` position titles prominently while organizing supporting content intuitively.
+
+### 3. **Progressive Disclosure**
+- **What It Means**: Present information incrementally to keep your audience engaged and avoid overwhelming them.
+- **Markdown’s Contribution**: Slidev extends Markdown with directives like `<v-click>` (to reveal content on click) and `<v-clicks>` (for list items), seamlessly integrating animations into your text.
+- **Neversink’s Support**: These directives work harmoniously within Neversink’s layouts, ensuring animations enhance your narrative without compromising the slide’s clean design.
+
+### 4. **Text-Visual Balance**
+- **What It Means**: Pair concise text with visuals (e.g., charts, images) to reinforce your message without overloading the slide.
+- **Markdown’s Contribution**: Easily embed images with `![alt text](image-url)` or code with ```` ``` ```` blocks, keeping text brief and impactful.
+- **Neversink’s Support**: Layouts like `two-cols-title` (text beside visuals) and `full` (full-screen images) simplify the integration of visuals, maintaining a balanced and uncluttered appearance.
+
+### 5. **Speaker Notes**
+- **What It Means**: Slides should serve as visual cues, with detailed explanations reserved for your spoken delivery or notes.
+- **Markdown’s Contribution**: Use `<!-- Your notes here -->` comments to embed speaker notes directly in the Markdown file, keeping slides lean.
+- **Neversink’s Support**: The theme encourages minimalistic slides, aligning with the principle that your audience sees the essentials while you retain the depth in your notes.
+
+By embracing these principles, and leveraging Markdown’s readability and Neversink’s design tools, you can craft presentations that are clear, visually appealing, and effective in communicating your ideas.
+
+---
+
+## 3. Setting Up Your Slidev Presentation with Neversink
+
+To start building your presentation, you’ll need to master the basic structure of a Slidev Markdown file and configure it with the Neversink theme. This section provides a detailed walkthrough of the setup process, including file structure, layout selection, and best practices for maintaining clean, readable slides.
+
+### Basic Structure of a Slidev Markdown File
+A Slidev presentation is typically housed in a single Markdown file (e.g., `slides.md`). Slides are separated by horizontal rules (`---`), and the file begins with a frontmatter block to define global settings.
+
+Here’s a simple example:
 ```markdown
 ---
 theme: neversink
-neversink_slug: 'Neural Networks in Medical Imaging'
+colorSchema: light
 ---
 
-# Deep Learning Approaches for Medical Image Analysis
-Dr. Jane Researcher | University Medical Center
+# Introduction to My Research
+
+A brief overview.
 
 ---
+
+# Key Findings
+
+- Finding 1
+- Finding 2
 ```
 
-### Narrative Flow Organization
+- **Frontmatter**: The YAML block (`---` to `---`) at the file’s start specifies the theme (`neversink`), color scheme (`light` or `dark`), and other global options.
+- **Slide Separation**: A standalone `---` marks the end of one slide and the start of the next.
+- **Content**: Use standard Markdown syntax—headings (`#`), lists (`-`), bold (`**`), etc.—to write your slides.
 
-Structure your presentation with a clear throughline:
+### Configuring Neversink Layouts with Frontmatter
+Neversink offers a variety of layouts to suit different slide purposes, from title pages to multi-column content. You can apply a layout to a specific slide by adding a frontmatter block at the beginning of that slide.
 
-1. **Opening**: Problem statement and motivation (cover layout)
-2. **Background**: Contextual information (section layout + default layouts)
-3. **Approach**: Your methods (two-column layouts)
-4. **Results**: Your findings (side-title layouts with visualizations)
-5. **Discussion**: Implications (quote layout for key takeaways)
-6. **Conclusion**: Summary and next steps (section layout)
-
-## Neversink Layouts Mastery
-
-Neversink offers specialized layouts that enhance visual communication:
-
-### Title Slide (Cover Layout)
-
+Example of a title slide:
 ```markdown
 ---
 layout: cover
-color: navy
+color: emerald-light
 ---
 
-# Quantum Computing Applications in Drug Discovery
-**Dr. Alex Chen** | Molecular Systems Lab
+# My Research Talk
 
-:: note ::
-
-This presentation covers our 3-year research program on quantum computing applications
-in pharmaceutical research, highlighting three breakthrough algorithms.
+Presented by Dr. Jane Doe
 ```
 
-### Standard Content (Default Layout)
+Key elements:
+- `layout: cover`: Selects the cover layout, perfect for a presentation’s opening slide.
+- `color: emerald-light`: Applies a light emerald color scheme (Neversink supports options like `teal-light`, `black`, etc.).
 
-```markdown
----
-layout: default
-color: blue-light
----
+Some common Neversink layouts include:
+- `cover`: Bold, centered design for title slides.
+- `default`: Standard layout for text-heavy content.
+- `two-cols-title`: Two columns with a title, great for combining text and figures.
+- `quote`: Highlights a quotation or key statement.
+- `full`: Full-screen layout for visuals or immersive content.
 
-# Challenges in Current Approaches
+You can override the global frontmatter for individual slides by adding a new frontmatter block before the slide’s content, as shown above.
 
-- Classical algorithms struggle with protein folding simulations
-- Exponential complexity limits molecular docking calculations
-- Accuracy-performance tradeoff restricts practical applications
+### Best Practice: Avoid Indented HTML
+While Slidev supports HTML within Markdown files, indented HTML can disrupt rendering. To ensure compatibility:
+- **Correct HTML**: Start HTML at the beginning of a line, with no leading spaces or tabs:
+  ```markdown
+  <div style="color: blue;">
+  This works fine.
+  </div>
+  ```
+- **Incorrect HTML**: Avoid indentation, as it may break the slide:
+  ```markdown
+    <div style="color: blue;">
+    This may not render correctly.
+    </div>
+  ```
 
-<!--
-[click] Classical algorithms can only model simple proteins efficiently
-[click] Even supercomputers require weeks for complex molecular docking
-[click] Industry currently sacrifices accuracy for speed in drug screening
--->
-```
+For readability and maintainability, prefer Markdown over HTML whenever possible. Neversink’s layouts and Markdown syntax cover most presentation needs, reducing the need for custom markup.
 
-### Two-Column Comparison (Two-Cols-Title Layout)
+## 4. Creating Slides with Markdown and Neversink
+
+This section guides you through crafting slide content using Markdown syntax, structuring slides with Neversink’s layouts and slots, and applying visual design via frontmatter. Markdown’s readability makes it ideal for academic content creation, while Neversink’s layouts and styling options provide the flexibility to present that content effectively.
+
+### Writing Content with Markdown Syntax
+Markdown is the primary tool for writing Slidev slides, offering a lightweight way to format text, embed media, and structure information. Below are the key Markdown elements you’ll use, complete with examples:
+
+- **Headings**: Use `#` for slide titles, `##` for sections, and `###` for subpoints to create a clear hierarchy.
+  ```markdown
+  # Slide Title
+  ## Section Header
+  ### Subpoint
+  ```
+
+- **Text Formatting**: Emphasize key ideas with `**bold**`, `*italic*`, or `==highlight==` (Neversink supports highlighting via `markdown-it-mark`).
+  ```markdown
+  This is **bold**, *italic*, and ==highlighted== text.
+  ```
+
+- **Lists**: Use `-` for unordered lists or numbers (`1.`, `2.`) for ordered lists to organize points logically.
+  ```markdown
+  - Bullet point one
+  - Bullet point two
+  1. Numbered item one
+  2. Numbered item two
+  ```
+
+- **Links**: Insert hyperlinks with `[text](url)` to reference external resources.
+  ```markdown
+  Learn more at [Slidev’s website](https://sli.dev).
+  ```
+
+- **Images**: Embed visuals with `![alt text](image-url)`, using relative paths for local files.
+  ```markdown
+  ![Research Diagram](/images/diagram.png)
+  ```
+
+- **Code Blocks**: Showcase code with triple backticks (```` ``` ````), specifying the language for syntax highlighting.
+  ```markdown
+  ```python
+  def greet(name):
+      return f"Hello, {name}!"
+  ```
+  ```
+
+- **Equations**: Use LaTeX for math—inline with `$` or display mode with `$$`.
+  ```markdown
+  Inline: $x^2 + y^2 = z^2$
+
+  Display:
+  $$ \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2} $$
+  ```
+
+- **Tables**: Build tables with `|` and `-` for structured data presentation.
+  ```markdown
+   | Variable | Value |
+   | -------- | ----- |
+   | X        | 10    |
+   | Y        | 20    |
+  ```
+
+- **Quotes**: Highlight statements with `>` for blockquotes.
+  ```markdown
+  > "The only way to do great work is to love what you do." — Steve Jobs
+  ```
+
+These Markdown basics cover most academic needs. While HTML is an option for advanced formatting, sticking to Markdown keeps your slides clean and maintainable.
+
+### Structuring Slides with Neversink Layouts and Slots
+Neversink provides predefined layouts like `cover`, `two-cols-title`, and `quote`, which you select via frontmatter. Content is then organized into **slots**—named placeholders like `:: title ::` or `:: left ::`—using Markdown.
+
+#### Example: `two-cols-title` Layout
+This layout splits a slide into two columns with a title, ideal for pairing text with visuals.
 
 ```markdown
 ---
 layout: two-cols-title
-columns: is-5
-align: c-lt-lt
 color: teal-light
+columns: is-6
+align: l-lt-lt
 ---
 
 :: title ::
-
-# Classical vs. Quantum Approaches
+# Study Results
 
 :: left ::
-
-## Classical Computing
-- Sequential processing
-- Binary bit-based
-- Deterministic algorithms
-- O(2^n) complexity scaling
-- Limited by Moore's Law
+- **Finding 1**: Significant improvement observed.
+- **Finding 2**: Consistent across all groups.
 
 :: right ::
-
-## Quantum Computing
-- Parallel processing
-- Quantum bit (qubit) based
-- Probabilistic algorithms
-- O(n) potential scaling
-- Limited by coherence time
+![Results Chart](/images/chart.png)
 ```
 
-### Side-Anchored Title (Side-Title Layout)
+- **Frontmatter Explained**:
+  - `layout: two-cols-title`: Chooses the two-column layout with a title.
+  - `color: teal-light`: Sets a light teal theme.
+  - `columns: is-6`: Gives each column equal width (6 units out of 12).
+  - `align: l-lt-lt`: Aligns the title left (`l`) and both columns left-top (`lt`).
 
-```markdown
----
-layout: side-title
-color: purple
-titlewidth: is-4
-side: l
-align: rm-lt
----
+- **Slots Explained**:
+  - `:: title ::`: The slide’s main heading.
+  - `:: left ::`: Text content, such as a list.
+  - `:: right ::`: Visual content, like an image.
 
-:: title ::
+This structure ensures a balanced, professional slide with minimal effort.
 
-# Key Results
+#### Common Layouts
+- **`cover`**: A centered layout for title slides or introductions.
+- **`default`**: A simple, centered design for text-focused slides.
+- **`quote`**: Emphasizes a quotation with a clean backdrop.
+- **`full`**: Maximizes space for large images or diagrams.
 
-:: content ::
+Check the [Layouts documentation](/layouts) for more options and details.
 
-Our quantum algorithm demonstrated:
+### Applying Visual Design with Frontmatter
+Frontmatter lets you customize slide appearance without CSS, ensuring consistency across your presentation.
 
-- **100x** speed improvement for molecular docking
-- **32%** increased accuracy in binding predictions
-- Feasible simulation of compounds with **>200 atoms**
-- Linear scaling with molecular complexity
+- **Color Schemes**: Use `color: [scheme]` (e.g., `navy`, `emerald-light`) to apply Neversink’s monochromatic palettes.
+- **Layout Options**: Adjust parameters like `columns` or `titlepos` depending on the layout.
 
-![Results Comparison](/images/quantum-speedup-graph.png)
-```
-
-### Section Divider
-
-```markdown
----
-layout: section
-color: indigo
----
-
-# Quantum Algorithm Design
-Building computational advantage through entanglement
-```
-
-### Quote Highlight
-
+#### Example: Quote Slide
 ```markdown
 ---
 layout: quote
 color: sky-light
-author: "Dr. Richard Feynman"
+quotesize: text-xl
+author: 'Marie Curie'
 ---
 
-"Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical."
+"Nothing in life is to be feared, it is only to be understood."
 ```
 
-### Top Title with Two Columns
+This creates a light blue slide with a large quote and the author’s name, styled elegantly via frontmatter.
 
+By mastering Markdown and Neversink’s layouts, you can create structured, visually appealing slides tailored to your academic content.
+
+---
+
+## 5. Animations and Interactivity
+
+Animations in Slidev enhance engagement by revealing content step-by-step, keeping your audience focused. These features are embedded in Markdown using directives like `<v-click>` and `<v-clicks>`, making them intuitive to use.
+
+### Using Slidev’s Directives for Animations
+Slidev’s animation directives let you control when content appears, all within Markdown.
+
+- **`<v-click>`**: Shows content on the next click.
+- **`<v-clicks>`**: Applies click-based reveals to multiple items sequentially.
+
+#### Example: Sequential Bullet Points
+Reveal list items one at a time:
 ```markdown
----
-layout: top-title-two-cols
-columns: is-6
-align: l-lt-lt
-color: amber-light
----
-
-:: title ::
-
-# Implementation Challenges
-
-:: left ::
-
-## Technical Barriers
-- Quantum decoherence
-- Error correction overhead
-- Limited qubit connectivity
-- Temperature requirements
-
-:: right ::
-
-## Our Solutions
-- Noise-resilient algorithm design
-- Hybrid classical-quantum approach
-- Optimized circuit depth
-- Strategic qubit allocation
+- <v-click> First finding: 10% increase </v-click>
+- <v-click> Second finding: 15% decrease </v-click>
+- <v-click> Third finding: No change </v-click>
 ```
 
-### Full Layout for Complex Visuals
-
+Or use `<v-clicks>` for brevity:
 ```markdown
----
-layout: full
----
-
-<div class="grid grid-cols-2 gap-4">
-<div>
-
-## Quantum Circuit Design
-![Circuit Diagram](/images/quantum-circuit.png)
-
-</div>
-<div>
-
-## Resulting Energy Landscape
-![Energy Graph](/images/energy-landscape.png)
-
-</div>
-</div>
-```
-
-## Color Psychology and the Neversink Color System
-
-Neversink's color schemes convey meaning:
-
-- **Blues (blue, sky, cyan)**: Trust, stability, data-focused content
-- **Greens (green, emerald, teal)**: Growth, success, positive results
-- **Reds/Oranges (red, orange, amber)**: Warnings, problems, challenges
-- **Purples (purple, violet, indigo)**: Creativity, innovation, theory
-- **Neutrals (white, light, dark, black)**: Foundational information
-
-Apply color consistently across related slides:
-
-```markdown
----
-layout: section
-color: red
----
-
-# Challenges and Limitations
-
----
-
-layout: default
-color: red-light
----
-
-# Four Key Challenges
-
-1. Limited quantum coherence time
-2. Noise contamination in measurements
-3. Circuit depth constraints
-4. Scaling issues beyond 100 qubits
-```
-
-## Animation and Progressive Disclosure
-
-Reveal information strategically to control narrative:
-
-### Bullet Point Animation
-
-```markdown
-# Key Findings
-
 <v-clicks>
-
-- Quantum approach shows exponential speedup
-- Error rates remain within acceptable bounds
-- System scales linearly with problem size
-- Method generalizes to other molecular systems
-
+- First finding: 10% increase
+- Second finding: 15% decrease
+- Third finding: No change
 </v-clicks>
 ```
 
-### Grouped Revelations
+Each click displays the next point, pacing your delivery effectively.
 
+#### Example: Staggered Text and Images
+Reveal a figure and its description in sequence:
 ```markdown
-<v-clicks>
+<v-click>
+![Experiment Setup](/images/setup.png)
+</v-click>
 
-## Algorithm Performance
-- Maintains coherence through 20 quantum gates
-- Achieves 95% fidelity in final results
-
-</v-clicks>
-
-<v-clicks>
-
-## Practical Implications
-- Enables drug discovery for previously intractable targets
-- Reduces screening time from months to days
-
-</v-clicks>
+<v-click>
+The setup includes three sensors monitoring temperature.
+</v-click>
 ```
 
-### Code Walkthrough
+This keeps the audience’s attention on one element at a time.
 
-````markdown
-```python {1-2|4-6|8-10|all}
-import qiskit
-from qiskit import QuantumCircuit, execute, Aer
+### Animating Code Blocks
+For technical slides, animate code blocks to highlight lines progressively, guiding your audience through complex logic.
 
-# Create quantum circuit with 3 qubits
-circuit = QuantumCircuit(3, 3)
-circuit.h(0)  # Hadamard gate on qubit 0
-
-# Create entanglement between qubits
-circuit.cx(0, 1)  # CNOT with control=0, target=1
-circuit.cx(0, 2)  # CNOT with control=0, target=2
-```
-````
-
-## Neversink Components for Visual Enhancement
-
-### Admonitions for Important Points
-
+#### Example: Step-by-Step Code Explanation
+Use `{1|2-3|all}` to specify highlight stages:
 ```markdown
-<AdmonitionType type="important" width="90%">
-
-Our quantum algorithm requires at least 20 qubits with >99% gate fidelity to demonstrate advantage over classical methods.
-
-</AdmonitionType>
+```python {1|2-3|all}
+def process_data(data):
+    filtered = [x for x in data if x > 0]  # Filter positive values
+    total = sum(filtered)                   # Sum the values
+    return total / len(filtered)            # Return average
+```
 ```
 
-### Speech Bubbles for Commentary
+- First click: Highlights line 1 (function definition).
+- Second click: Highlights lines 2–3 (filtering and summing).
+- Third click: Shows all lines (complete function).
 
+This technique is invaluable for teaching or explaining algorithms.
+
+### Purposeful Animations in Academic Contexts
+Animations should enhance, not distract:
+- **Guide Focus**: Reveal content gradually to emphasize key points.
+- **Simplify Complexity**: Use code highlights to break down dense material.
+- **Be Restrained**: Limit animations to avoid overwhelming viewers—typically one or two reveals per slide suffice.
+
+Slidev’s Markdown-integrated animations make it easy to create dynamic, audience-friendly slides without sacrificing clarity.
+
+---
+
+## 6. Advanced Features: Neversink Components
+
+Neversink’s custom components add functionality and flair to your slides, from highlighting notes to sharing links via QR codes. These components integrate directly into Markdown, maintaining simplicity while enhancing your presentation.
+
+### Overview of Key Neversink Components
+Here are some standout components for academic use:
+- **`Admonition`**: A styled box for notes, tips, or warnings.
+- **`StickyNote`**: A note-like element for annotations.
+- **`QRCode`**: A scannable code linking to external resources.
+- **`SpeechBubble`**: A bubble for quotes or commentary.
+- **`Kawaii`**: Playful characters for visual appeal.
+
+Each component is customizable via props, letting you tailor its appearance and behavior.
+
+### Including Components in Markdown
+Components are added using a tag-like syntax within Markdown, with props to adjust their settings.
+
+#### Example: `Admonition` Component
+Highlight a critical note:
 ```markdown
-<SpeechBubble position="r" color="cyan" shape="round" maxWidth="300px">
-
-This unexpected phase transition occurs only in the quantum regime and has no classical analogue.
-
-</SpeechBubble>
+<Admonition title="Tip" color="teal-light">
+Use consistent naming conventions for better readability.
+</Admonition>
 ```
 
-### Sticky Notes for Supplementary Information
+- **Props**:
+  - `title`: The box’s heading (default: "Note").
+  - `color`: A Neversink color scheme (e.g., `teal-light`).
+- **Content**: Supports Markdown inside, like **bold** or *italics*.
 
+This renders a teal box with a "Tip" title and your message.
+
+#### Example: `StickyNote` Component
+Add a side note:
 ```markdown
-<StickyNote color="amber-light" textAlign="left" width="200px" title="Historical Note">
-
-Feynman first proposed quantum computers specifically to simulate quantum physics in 1982.
-
+<StickyNote color="amber-light" width="200px">
+Check the appendix for detailed proofs.
 </StickyNote>
 ```
 
-### QR Codes for Resources
+- **Props**:
+  - `color`: Note color (e.g., `amber-light`).
+  - `width`: Size in pixels (default: `180px`).
 
+#### Example: `QRCode` Component
+Share a resource link:
 ```markdown
-<div class="flex justify-between items-center">
-<div>
-
-## Access Our Dataset
-Scan to download complete experimental results and code repository
-
-</div>
-<QRCode value="https://github.com/your-repo/quantum-drug-discovery" :size="200" />
-</div>
+<QRCode value="https://your-paper.com" :size="150" />
 ```
 
-## Typography Best Practices
+- **Props**:
+  - `value`: The URL to encode.
+  - `:size`: QR code dimensions (e.g., `150` for 150px).
 
-### Hierarchy Through Type
+### Combining Components with Markdown Content
+Integrate components with your slide content for a cohesive look.
 
-- **Slide Titles**: 32-40px (Default Neversink h1)
-- **Section Headers**: 24-28px (Default Neversink h2)
-- **Body Text**: 18-22px (Default Neversink paragraph)
-- **Captions/Notes**: 14-16px (Use smaller text classes)
-
+#### Example: Annotated Diagram
 ```markdown
-# Primary Title
+---
+layout: two-cols-title
+color: emerald-light
+---
 
-## Secondary Heading
+:: title ::
+# Experiment Overview
 
-Regular body text appears at this size.
+:: left ::
+![Lab Setup](/images/lab.png)
 
-<div class="text-sm">Smaller text for references or technical details</div>
+:: right ::
+<StickyNote color="emerald-light" width="250px">
+Sensor A failed twice during initial tests.
+</StickyNote>
 ```
 
-### Highlighting Key Text
+This pairs a diagram with a matching sticky note, enhancing the slide’s clarity.
+
+### Tips for Effective Component Use
+- **Consistency**: Align component colors with your slide’s `color` setting.
+- **Moderation**: Use one or two components per slide to maintain focus.
+- **Positioning**: For precise placement, add `v-drag` (e.g., `<StickyNote v-drag>`), ensuring a fixed `width`.
+
+Neversink components enrich your slides with minimal effort, keeping Markdown at the core of your workflow.
+
+
+## 7. Examples and Best Practices
+
+This section offers concrete examples of how to structure various types of academic slides using Slidev with the Neversink theme. Each example includes Markdown code and a brief explanation, demonstrating how to apply Neversink’s layouts and components effectively. We also share best practices to ensure your presentation is consistent, clear, and engaging.
+
+### Sample Slides for Academic Content
+
+#### **Title Slide with Author and Affiliation**
+Use the `cover` layout for a bold, centered title slide that introduces your presentation professionally.
 
 ```markdown
-This approach works in standard conditions, but ==fails dramatically in edge cases== where quantum effects dominate.
+---
+layout: cover
+color: navy-light
+---
+
+# Advances in Quantum Computing
+
+**Dr. Emily Carter**
+Department of Physics, University of Science
+
+<!-- This slide sets the stage for the talk, providing context for the audience. -->
 ```
 
-## Visual Design Principles for Academic Presentations
+- **Explanation**: The `cover` layout centers the title and author details, while the `navy-light` color scheme adds a professional touch. Speaker notes are embedded in comments for your reference during delivery.
 
-### Data Visualization
-
-Present data clearly and honestly:
+#### **Figure Slide with Caption**
+The `two-cols-title` layout is perfect for pairing a figure with its description or caption.
 
 ```markdown
-<div class="flex justify-center">
-<div class="w-4/5">
-<img v-click src="/algorithm-comparison.png" class="w-full" />
-</div>
-</div>
+---
+layout: two-cols-title
+color: emerald-light
+columns: is-6
+align: l-lt-lt
+---
 
-<div class="grid grid-cols-3 gap-4 mt-4">
-<div v-click class="bg-green-50 p-2 rounded text-center">
-<div class="text-xl font-bold text-green-700">99.3%</div>
-<div class="text-sm">Accuracy</div>
-</div>
-<div v-click class="bg-blue-50 p-2 rounded text-center">
-<div class="text-xl font-bold text-blue-700">100x</div>
-<div class="text-sm">Speed Improvement</div>
-</div>
-<div v-click class="bg-purple-50 p-2 rounded text-center">
-<div class="text-xl font-bold text-purple-700">5x</div>
-<div class="text-sm">Energy Efficiency</div>
-</div>
-</div>
+:: title ::
+# Experiment Results
+
+:: left ::
+![Temperature vs. Time](/images/temp-time.png)
+
+:: right ::
+- **Figure 1**: Temperature fluctuations over time during the reaction.
+- Key observation: A sharp increase at the 10-minute mark.
+
+:: default ::
+Source: Carter et al., 2023
 ```
 
-### White Space
+- **Explanation**: The left column displays the figure, the right column provides its caption, and the default slot adds a citation. This layout ensures a balanced, clear presentation of visual data.
 
-Embrace emptiness for clarity:
+#### **Table Slide**
+Use the `default` layout to present structured data, such as experimental results or comparisons.
 
 ```markdown
 ---
@@ -438,276 +559,169 @@ layout: default
 color: light
 ---
 
-<div class="py-10">
+# Participant Demographics
 
-# Simplicity Enhances Comprehension
+| Age Group | Number | Percentage |
+| --------- | ------ | ---------- |
+| 18-25     | 120    | 30%        |
+| 26-35     | 150    | 37.5%      |
+| 36-45     | 80     | 20%        |
+| 46+       | 50     | 12.5%      |
 
-Our most important finding is that quantum algorithms provide exponential speedup for molecular simulations.
-
-</div>
+*Data collected from 400 participants in the 2023 study.*
 ```
 
-### Rule of Thirds
+- **Explanation**: A simple Markdown table, centered via the `default` layout, keeps the focus on the data. The italicized note at the bottom provides context without cluttering the table.
 
-Position key elements at natural focus points:
-
-```markdown
----
-layout: full
----
-
-<div class="grid grid-cols-3 grid-rows-3 h-full">
-<div class="col-span-2 row-span-2">
-<img src="/main-diagram.png" class="h-full w-full object-contain" />
-</div>
-<div class="col-start-3 row-start-1">
-<h2>Key Components</h2>
-</div>
-<div class="col-start-3 row-start-2">
-
-- Entanglement generator
-- Error correction module
-- Measurement system
-
-</div>
-<div class="col-start-1 col-span-3 row-start-3">
-<p class="text-center pt-4">Our architecture integrates these components to achieve quantum advantage</p>
-</div>
-</div>
-```
-
-## Practical Slide Patterns for Academic Presentations
-
-### Problem Statement Slide
+#### **Equation Slide**
+Present mathematical content with the `default` layout, using LaTeX for equations.
 
 ```markdown
 ---
 layout: default
-color: red-light
+color: white
 ---
 
-# The Molecular Docking Challenge
+# Key Equations
 
-<div class="grid grid-cols-2 gap-4">
-<div>
-<v-clicks>
+**Schrödinger's Equation:**
 
-- Drug discovery requires evaluating billions of molecular interactions
-- Classical algorithms scale exponentially with molecule size
-- Current approaches limited to ~100 atom systems
-- Industry relies on severe approximations
+$$ i\hbar \frac{\partial}{\partial t} \Psi(\mathbf{r}, t) = \hat{H} \Psi(\mathbf{r}, t) $$
 
-</v-clicks>
-</div>
+**Explanation**: Describes the quantum state evolution over time.
 
-<div class="flex items-center justify-center">
-<img v-click src="/molecular-complexity.png" class="h-60 rounded shadow" />
-</div>
-</div>
+**Heisenberg Uncertainty Principle:**
+
+$$ \Delta x \Delta p \geq \frac{\hbar}{2} $$
+
+**Explanation**: Limits the precision of position and momentum measurements.
 ```
 
-### Methods Slide
+- **Explanation**: Equations are rendered prominently with LaTeX, paired with concise explanations in Markdown. The `white` color scheme ensures readability against complex notation.
 
-```markdown
----
-layout: top-title-two-cols
-columns: is-4
-align: l-lt-lt
-color: blue-light
----
-
-:: title ::
-
-# Quantum Phase Estimation Approach
-
-:: left ::
-
-## Core Algorithm Steps
-<v-clicks>
-
-1. Initialize quantum register to reference state
-2. Apply molecular Hamiltonian evolution
-3. Perform quantum Fourier transform
-4. Measure energy eigenvalues
-5. Post-process results classically
-
-</v-clicks>
-
-:: right ::
-
-<div class="flex justify-center items-center h-full">
-<img src="/circuit-diagram.png" class="max-h-80 max-w-full" />
-</div>
-```
-
-### Results Comparison Slide
-
-```markdown
----
-layout: side-title
-color: green
-titlewidth: is-3
-side: l
-align: rm-lt
----
-
-:: title ::
-
-# Performance Comparison
-
-:: content ::
-
-<div class="grid grid-cols-2 gap-8">
-<div>
-
-## Classical Approach
-- Processing time: 72 hours
-- Accuracy: 76%
-- Energy resolution: ±0.5 kcal/mol
-- Max molecule size: 100 atoms
-
-</div>
-<div>
-
-## Our Quantum Approach
-- Processing time: 45 minutes
-- Accuracy: 94%
-- Energy resolution: ±0.1 kcal/mol
-- Max molecule size: 300 atoms
-
-</div>
-</div>
-
-<div class="pt-8">
-<img src="/performance-graph.png" class="w-4/5 mx-auto" />
-</div>
-```
-
-### Implications/Discussion Slide
+#### **Quote Slide**
+Highlight an inspiring or relevant quote with the `quote` layout.
 
 ```markdown
 ---
 layout: quote
-color: purple-light
+color: sky-light
 quotesize: text-xl
-authorsize: text-lg
+author: 'Albert Einstein'
 ---
 
-<div class="py-4">
-
-"Our quantum approach fundamentally changes what's possible in computational drug discovery, potentially reducing development timelines from years to months."
-
-</div>
-
-<div class="pt-4 text-right">
-<AdmonitionType type="tip" width="60%" class="ml-auto">
-
-This could enable targeting of previously "undruggable" proteins associated with major diseases.
-
-</AdmonitionType>
-</div>
+"Imagination is more important than knowledge. For knowledge is limited, whereas imagination embraces the entire world."
 ```
 
-### Future Work/Conclusion Slide
+- **Explanation**: The `quote` layout centers the text and author, creating a visually striking slide. Adjust `quotesize` to fit longer quotes comfortably.
+
+#### **Progressive Disclosure Slide**
+Use `<v-clicks>` to reveal points sequentially, maintaining audience engagement.
 
 ```markdown
 ---
 layout: default
-color: indigo-light
+color: light
 ---
 
-# Future Directions
+# Research Challenges
 
-<div class="grid grid-cols-3 gap-4">
-<div class="bg-white bg-opacity-50 p-4 rounded-lg shadow">
-<h3 class="text-indigo-700 mb-2">Hardware Scaling</h3>
-Extend to 100+ qubit systems with improved coherence times
-</div>
+<v-clicks>
+- Data scarcity in early experiments
+- High computational costs for simulations
+- Ethical considerations in data collection
+</v-clicks>
 
-<div class="bg-white bg-opacity-50 p-4 rounded-lg shadow">
-<h3 class="text-indigo-700 mb-2">Algorithm Refinement</h3>
-Optimize circuit depth and error mitigation techniques
-</div>
-
-<div class="bg-white bg-opacity-50 p-4 rounded-lg shadow">
-<h3 class="text-indigo-700 mb-2">Clinical Applications</h3>
-Partner with pharmaceutical companies for real-world testing
-</div>
-</div>
-
-<div class="mt-8 text-center">
-<QRCode value="https://example.com/contact" :size="120" class="inline-block" />
-<p class="mt-2">Scan to collaborate with our team</p>
-</div>
+<!-- Each challenge will be discussed in detail. [click] Reveal each point as you elaborate. -->
 ```
 
-## Advanced Slidev Techniques
+- **Explanation**: Each bullet appears with a new click, allowing you to pace your explanation. Speaker notes include a `[click]` marker to sync your delivery with the animation.
 
-### Custom Component Positioning
+### Tips for Effective Use
 
-```markdown
+- **Leverage Neversink Layouts for Consistency**:
+  - Use a small set of layouts (e.g., `default`, `two-cols-title`, `quote`) to maintain a cohesive look across slides.
+  - Apply the same `color` scheme to similar slides (e.g., all data slides in `emerald-light`) for visual unity.
+
+- **Format Citations with Markdown**:
+  - Place citations in the default slot or as plain text below content.
+  - Example with minimal HTML for styling:
+    ```markdown
+    <div class="text-sm text-gray-500 mt-2">
+    Carter, E., et al. (2023). *Journal of Quantum Studies*, 12(3), 45-60.
+    </div>
+    ```
+  - Prefer Markdown for simplicity, reserving HTML for precise formatting needs.
+
+- **Use Components Sparingly**:
+  - Enhance slides with Neversink components like `StickyNote` or `Admonition`, but limit to one or two per slide to avoid distraction.
+  - Match component colors to the slide’s `color` scheme for a seamless look.
+
+- **Preview Regularly**:
+  - Use Slidev’s live preview to test animations, layout balance, and readability.
+  - Adjust frontmatter settings (e.g., `columns`, `align`) to optimize spacing and alignment.
+
+These examples and tips enable you to craft professional, academic slides that align with best practices while maximizing Slidev and Neversink’s capabilities.
+
 ---
-layout: full
----
 
-<StickyNote color="blue-light" width="200px" v-drag="[150,120,200,150]">
-This interaction is key to quantum advantage
-</StickyNote>
+## 8. Common Pitfalls and Solutions
 
-<ArrowDraw color="red" v-drag="[350,250,200,100]"/>
+Even with Slidev’s straightforward design and Neversink’s features, certain challenges can disrupt your presentation’s flow or polish. This section identifies these pitfalls and provides actionable solutions to ensure your slides remain effective and professional.
 
-<div class="flex justify-center items-center h-full">
-<img src="/complex-diagram.png" class="max-h-80 max-w-full" />
-</div>
-```
+### Common Pitfalls
 
-### Tailwind Utility Classes for Layout
+#### **1. Overusing HTML**
+- **Issue**: Excessive reliance on HTML for formatting can make your Markdown files complex, hard to read, and difficult to maintain, undermining Slidev’s simplicity.
+- **Solution**: Use Markdown for text, lists, images, and tables whenever possible. Reserve HTML for specific needs (e.g., custom layouts or components) and keep it minimal and well-structured.
 
-```markdown
-<div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg shadow">
-<div class="text-xl font-bold text-blue-800">Key Finding</div>
-<div class="text-4xl">→</div>
-<div>Quantum systems provide exponential speedup</div>
-</div>
-```
+#### **2. Indentation Errors with HTML**
+- **Issue**: Indenting HTML within Markdown files can break Slidev’s rendering, causing content to vanish or display incorrectly.
+- **Solution**: Keep HTML tags flush left (no leading spaces or tabs). Indent within the HTML block if needed for readability, but not in the Markdown structure.
 
-Common useful Tailwind classes in Neversink:
-- Flexbox: `flex`, `justify-between`, `items-center`
-- Grid: `grid`, `grid-cols-2`, `gap-4`
-- Spacing: `p-4`, `mt-8`, `mb-2`
-- Styling: `rounded-lg`, `shadow`, `bg-opacity-50`
+  **Incorrect**:
+  ```markdown
+      <div style="color: blue;">
+      This may not render.
+      </div>
+  ```
 
-## Common Pitfalls and Solutions
+  **Correct**:
+  ```markdown
+  <div style="color: blue;">
+  This works fine.
+  </div>
+  ```
 
-1. **Overcrowded Slides**
-   - Solution: Split content across multiple slides
-   - Rule: Max 5 bullet points per slide, 25 words per bullet
+#### **3. Inconsistent Design**
+- **Issue**: Using too many layouts, colors, or custom styles can result in a disjointed, unprofessional presentation.
+- **Solution**: Adhere to Neversink’s predefined layouts and a limited color palette (e.g., 2-3 schemes). Apply consistent frontmatter settings across slides. For custom elements, use Neversink components or minimal, reusable HTML.
 
-2. **Text-Heavy Presentation**
-   - Solution: Convert text to visuals, diagrams, and icons
-   - Rule: If you're reading directly from slides, redesign them
+#### **4. Neglecting Speaker Notes**
+- **Issue**: Omitting speaker notes can leave slides lacking context, especially for complex academic topics, making delivery harder.
+- **Solution**: Embed detailed notes using `<!-- Your notes here -->` for each slide. These notes support rehearsal and ensure your spoken content complements the visuals.
 
-3. **Inconsistent Design**
-   - Solution: Use consistent layouts for similar content types
-   - Rule: Define color scheme and layout patterns before creating content
+### Solutions and Best Practices
 
-4. **Poor Contrast**
-   - Solution: Use Neversink's paired color schemes
-   - Rule: Test readability by viewing slides from 10 feet away
+- **Prioritize Markdown**:
+  - Use Markdown for most content creation—it’s faster, cleaner, and easier to edit or share.
+  - Limit HTML to cases where Markdown falls short, such as advanced styling or custom components.
 
-5. **Gratuitous Animations**
-   - Solution: Use animations purposefully to reveal logical progression
-   - Rule: Animations should reveal meaningful information, not distract
+- **Keep HTML Flush Left**:
+  - Ensure all HTML starts at the beginning of the line to avoid rendering issues.
+  - Test slides in preview mode if HTML is used extensively.
 
-## Conclusion
+- **Maintain Design Uniformity**:
+  - Select a primary layout for content slides (e.g., `default` or `two-cols-title`).
+  - Use a consistent `color` scheme for similar slide types (e.g., all intro slides in `navy-light`).
+  - Incorporate Neversink components like `Admonition` or `StickyNote` sparingly for visual accents, aligning their colors with the slide theme.
 
-Effective presentations with Slidev and Neversink combine:
+- **Include Comprehensive Speaker Notes**:
+  - Add notes in `<!-- -->` comments to outline talking points or emphasize key ideas.
+  - Include `[click]` markers in notes to sync with animations like `<v-clicks>`, ensuring smooth delivery.
 
-1. **Clear content strategy**: One message per slide, logical flow throughout
-2. **Visual design principles**: Hierarchy, contrast, white space, rule of thirds
-3. **Neversink's layout system**: Leverage purpose-built layouts for different content types
-4. **Progressive disclosure**: Reveal information in a measured, logical sequence
-5. **Markdown-first approach**: Keep slides clean and maintainable
-6. **Visual components**: Enhance with Neversink components for emphasis and clarity
+- **Preview and Adjust**:
+  - Regularly view your slides in Slidev’s preview mode to catch rendering or design issues early.
+  - Fine-tune frontmatter (e.g., `columns`, `align`) to perfect layout and spacing.
 
-Remember that slides support your presentation—they are not the presentation itself. Design them to complement and enhance your spoken narrative, not replace it.
+By anticipating these pitfalls and applying these solutions, you can create presentations that are visually appealing, easy to maintain, and impactful for academic audiences.
