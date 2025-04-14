@@ -188,6 +188,226 @@ color: light
 </div>
 
 ---
+layout: default
+color: navy-light
+---
+
+# Figure Component Examples
+
+This section showcases the various capabilities of the Neversink Figure component.
+
+<!--
+The following slides demonstrate:
+- Basic image usage
+- Image with caption and custom width
+- Video with controls
+- Multiple layout options
+-->
+
+---
+layout: two-cols-title
+color: teal-light
+columns: is-7
+align: l-lt-lt
+---
+
+:: title ::
+# Basic Figure Usage
+
+:: left ::
+
+## Simple Image
+
+<Figure
+  src="https://picsum.photos/seed/basic/500/300"
+  class="w-full"
+/>
+
+## Image with Caption
+
+<Figure
+  src="https://picsum.photos/seed/caption/500/300"
+  caption="Figure 4: Sample image with descriptive caption"
+  class="w-full"
+  color="teal-light"
+/>
+
+:: right ::
+
+## Styling with Tailwind Classes
+
+<Figure
+  src="https://picsum.photos/seed/styling/500/300"
+  caption="Figure 5: Rounded corners and shadow effects"
+  class="w-full rounded-lg shadow-lg"
+  color="teal-light"
+/>
+
+---
+layout: default
+color: emerald-light
+---
+
+# Video Examples
+
+<div class="grid grid-cols-2 gap-8">
+  <div>
+    <h2 class="text-center mb-4">Standard Video</h2>
+    <Figure
+      type="video"
+      src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+      caption="Video 1: Standard playback (click to play/pause)"
+      class="w-full"
+      color="emerald-light"
+    />
+  </div>
+
+  <div>
+    <h2 class="text-center mb-4">With Progress Bar</h2>
+    <Figure
+      type="video"
+      src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+      caption="Video 2: With progress tracking"
+      class="w-full"
+      progress
+      color="emerald-light"
+    />
+  </div>
+</div>
+
+---
+layout: two-cols-title
+color: sky-light
+columns: is-6
+---
+
+:: title ::
+# Advanced Video Options
+
+:: left ::
+
+## Autoplay & Repeat
+
+<Figure
+  type="video"
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  caption="Video 3: Autoplays and loops continuously"
+  class="w-full"
+  autostart
+  repeat
+  progress
+  color="sky-light"
+/>
+
+:: right ::
+
+## Responsive Sizing
+
+<Figure
+  type="video"
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  caption="Video 4: Responsive with Tailwind"
+  class="w-full sm:w-3/4 lg:w-full rounded-md"
+  progress
+  color="sky-light"
+/>
+
+---
+layout: full
+color: rose-light
+---
+
+# Creative Layouts with Figures
+
+<div class="grid grid-cols-3 gap-4">
+  <Figure
+    src="https://picsum.photos/seed/grid1/300/200"
+    caption="Left image"
+    class="w-full"
+    color="rose-light"
+  />
+
+  <Figure
+    src="https://picsum.photos/seed/grid2/300/200"
+    caption="Center image"
+    class="w-full"
+    color="rose-light"
+  />
+
+  <Figure
+    type="video"
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    caption="Right video"
+    class="w-full"
+    progress
+    color="rose-light"
+  />
+</div>
+
+<div class="mt-8">
+  <Admonition title="Pro Tip" color="rose-light">
+    Combine Figure components with grid layouts to create visually balanced slide designs
+  </Admonition>
+</div>
+
+---
+layout: two-cols-title
+color: amber-light
+columns: is-6
+---
+
+:: title ::
+# Figure Component Code Examples
+
+:: left ::
+
+## Basic Image with Caption
+
+```md
+<Figure
+  src="/images/photo.png"
+  caption="Figure caption"
+  class="w-full"
+  color="amber-light"
+/>
+```
+
+## Video with Progress
+
+```md
+<Figure
+  type="video"
+  src="/videos/demo.mp4"
+  caption="Video caption"
+  class="w-full"
+  progress
+  color="amber-light"
+/>
+```
+
+:: right ::
+
+## Advanced Video Options
+
+```md
+<Figure
+  type="video"
+  src="/videos/demo.mp4"
+  caption="Looping video"
+  class="w-3/4 mx-auto"
+  autostart
+  repeat
+  progress
+  color="amber-light"
+/>
+```
+
+<!--
+Encourage attendees to experiment with the different Figure options
+Mention that videos play inline - no fullscreen mode needed
+-->
+
+---
 layout: end
 color: navy-light
 ---
