@@ -20,12 +20,27 @@ A basic image figure can be created like this:
 | ----------- | --------- | --------- | --------------------------------------------------- |
 | `src`       | `String`  | Required  | The source URL of the image or video                |
 | `caption`   | `String`  | `''`      | Caption text to display below the figure            |
-| `width`     | `String`  | `'100%'`  | Width of the figure component                       |
+| `width`     | `String`  | `null`    | Width of the figure component                       |
 | `type`      | `String`  | `'image'` | Type of media to display: `'image'` or `'video'`    |
 | `autostart` | `Boolean` | `false`   | For videos: automatically start playing when loaded |
 | `repeat`    | `Boolean` | `false`   | For videos: loop the video                          |
 | `progress`  | `Boolean` | `false`   | For videos: show a progress bar below the video     |
 | `color`     | `String`  | `'light'` | Color scheme for the caption and progress bar       |
+| `class`     | `String`  | `''`      | CSS classes to apply to the component               |
+
+## Direct Replacement for Native Elements
+
+The Figure component can be used as a direct replacement for native `<img>` and `<video>` elements:
+
+```md
+<!-- Instead of this: -->
+<img src="/images/photo.png" class="w-75" />
+
+<!-- You can use this: -->
+<Figure src="/images/photo.png" class="w-75" />
+```
+
+When used without a caption or progress bar, the Figure component will behave like its native HTML counterpart, preserving your CSS classes and styling.
 
 ## Styling with Tailwind
 

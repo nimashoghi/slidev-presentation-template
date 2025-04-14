@@ -12,7 +12,7 @@ const props = defineProps({
   },
   width: {
     type: String,
-    default: '100%',
+    default: null,
   },
   type: {
     type: String,
@@ -35,6 +35,10 @@ const props = defineProps({
     type: String,
     default: 'light',
   },
+  class: {
+    type: [String, Array, Object],
+    default: '',
+  },
 })
 
 // Reference to video element for progress tracking
@@ -45,6 +49,20 @@ const isPlaying = ref(false)
 // For the color scheme
 const colorscheme = computed(() => {
   return `neversink-${props.color}-scheme`
+})
+
+// Computed style for container
+const containerStyle = computed(() => {
+  const style = {}
+  if (props.width) {
+    style.width = props.width
+  }
+  return style
+})
+
+// Determine if we need to apply the figure container styling
+const usesFigureStyling = computed(() => {
+  return !!props.caption || props.progress
 })
 
 // Update progress bar when video is playing
@@ -116,17 +134,30 @@ watch(() => props.type, cleanupListeners)
 </script>
 
 <template>
-  <div class="figure-container" :style="{ width: props.width }" :class="colorscheme">
-    <div class="figure-content-wrapper">
+  <div
+    :class="[
+      usesFigureStyling ? 'figure-container' : '',
+      colorscheme,
+      props.class
+    ]"
+    :style="usesFigureStyling ? containerStyle : {}"
+  >
+    <div :class="{ 'figure-content-wrapper': usesFigureStyling }">
       <!-- Image content -->
-      <img v-if="props.type === 'image'" :src="props.src" class="figure-content" />
+      <img
+        v-if="props.type === 'image'"
+        :src="props.src"
+        :class="[usesFigureStyling ? 'figure-content' : '', !usesFigureStyling ? props.class : '']"
+        :style="!usesFigureStyling && props.width ? { width: props.width } : {}"
+      />
 
       <!-- Video content -->
-      <div v-else-if="props.type === 'video'" class="video-wrapper">
+      <div v-else-if="props.type === 'video'" :class="{ 'video-wrapper': usesFigureStyling }">
         <video
           ref="videoRef"
           :src="props.src"
-          class="figure-content"
+          :class="[usesFigureStyling ? 'figure-content' : '', !usesFigureStyling ? props.class : '']"
+          :style="!usesFigureStyling && props.width ? { width: props.width } : {}"
           @click="togglePlay"
           :autoplay="props.autostart"
           :loop="props.repeat"
@@ -203,5 +234,13 @@ watch(() => props.type, cleanupListeners)
 
 .figure-caption p {
   margin: 0;
+}
+
+/* Styles for non-figure mode (when no caption or progress) */
+div:not(.figure-container) > div:not(.figure-content-wrapper) > img,
+div:not(.figure-container) > div:not(.figure-content-wrapper) > div:not(.video-wrapper) > video {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
 }
 </style>
