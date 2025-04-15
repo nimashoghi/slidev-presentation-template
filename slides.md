@@ -1,7 +1,7 @@
 ---
 theme: neversink
 title: Advanced Research Methods
-titleTemplate: '%s - Academic Presentation'
+titleTemplate: "%s - Academic Presentation"
 mdc: true
 transition: slide-left
 layout: cover
@@ -9,6 +9,7 @@ color: navy-light
 ---
 
 # Advanced Research Methods
+
 ## A Multi-Modal Analysis
 
 Dr. Academic Researcher
@@ -30,6 +31,7 @@ align: l-lt-lt
 ---
 
 :: title ::
+
 # Research Overview
 
 :: left ::
@@ -62,16 +64,18 @@ color: teal-light
 <v-clicks>
 
 1. Data Collection
-   - Systematic sampling approach
-   - Quality control measures
+
+    - Systematic sampling approach
+    - Quality control measures
 
 2. Analysis Framework
-   - Statistical methods
-   - Validation techniques
+
+    - Statistical methods
+    - Validation techniques
 
 3. Implementation
-   - Custom algorithms
-   - Performance optimization
+    - Custom algorithms
+    - Performance optimization
 
 </v-clicks>
 
@@ -86,14 +90,15 @@ color: sky-light
 ---
 
 :: title ::
+
 # Key Results
 
 :: left ::
 | Metric | Value | p-value |
 | ------ | ----- | ------- |
-| Alpha  | 0.82  | < 0.001 |
-| Beta   | 0.75  | < 0.005 |
-| Gamma  | 0.93  | < 0.001 |
+| Alpha | 0.82 | < 0.001 |
+| Beta | 0.75 | < 0.005 |
+| Gamma | 0.93 | < 0.001 |
 
 :: right ::
 
@@ -113,9 +118,10 @@ color: white
 
 **Core Equation:**
 
-$$ \mathcal{L}(\theta) = \sum_{i=1}^n (y_i - f_\theta(x_i))^2 $$
+$$ \mathcal{L}(\theta) = \sum*{i=1}^n (y_i - f*\theta(x_i))^2 $$
 
 Where:
+
 - $\theta$ represents model parameters
 - $n$ is the sample size
 - $f_\theta$ is our proposed function
@@ -134,7 +140,7 @@ The model converges under standard conditions
 layout: quote
 color: rose-light
 quotesize: text-xl
-author: 'Notable Scientist'
+author: "Notable Scientist"
 ---
 
 "The advancement of science depends on new techniques, new discoveries, and new ideas, probably in that order."
@@ -182,7 +188,7 @@ color: light
 
 <QRCode value="https://example.com/research" :size="150" />
 
-*Scan for more details*
+_Scan for more details_
 
 </div>
 </div>
@@ -212,6 +218,7 @@ align: l-lt-lt
 ---
 
 :: title ::
+
 # Basic Figure Usage
 
 :: left ::
@@ -282,6 +289,7 @@ columns: is-6
 ---
 
 :: title ::
+
 # Advanced Video Options
 
 :: left ::
@@ -357,6 +365,7 @@ columns: is-6
 ---
 
 :: title ::
+
 # Figure Component Code Examples
 
 :: left ::
