@@ -4,13 +4,13 @@
  */
 export default {
     // Enable PDF export (requires playwright-chromium)
-    pdf: true,
+    pdf: false,
 
     // Enable PDF outline in exported PDF
-    pdfOutline: true,
+    pdfOutline: false,
 
     // Enable PPTX export (requires playwright-chromium)
-    pptx: true,
+    pptx: false,
 
     // Wait time in milliseconds before exporting each slide (helps with animations/content loading)
     wait: 1000,
