@@ -54,9 +54,12 @@ jobs:
                   version: 8
             # Install dependencies
             - run: pnpm install
-            # Install Playwright with Chromium for PDF/PPTX export
-            - name: Install Playwright with Chromium
-              run: npx playwright install --with-deps chromium
+            # Install playwright-chromium specifically for PDF/PPTX export
+            - name: Install playwright-chromium
+              run: pnpm add -D playwright-chromium
+            # Install system dependencies for Playwright
+            - name: Install Playwright system dependencies
+              run: npx playwright install-deps chromium
             # Run auto-export script to generate PDF/PPTX files
             - name: Generate PDF and PPTX exports
               run: pnpm auto-export
