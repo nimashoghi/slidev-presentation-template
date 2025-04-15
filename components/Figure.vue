@@ -240,7 +240,7 @@ watch(() => props.type, cleanupListeners)
 .progress-bar {
     height: 100%;
     background-color: var(--neversink-highlight-color);
-    transition: width 0.1s ease;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .figure-caption {
