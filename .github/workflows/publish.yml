@@ -1,21 +1,30 @@
 name: Build and deploy slides
-# 'id-token: write' is required to deploy to GitHub Pages.
-permissions: write-all
+
+# Define specific permissions instead of write-all for better security
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
 on:
+    workflow_dispatch: # Allow manual triggering
     push:
         branches:
             - main
+
+# Add concurrency control to prevent parallel deployments
+concurrency:
+    group: pages
+    cancel-in-progress: false
+
 jobs:
-    publish:
+    build:
         runs-on: ubuntu-latest
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
         env:
             BUILD_TYPE: production
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-node@v3
+            - uses: actions/setup-node@v4
               with:
                   node-version: 20
             - uses: pnpm/action-setup@v2
@@ -24,11 +33,24 @@ jobs:
             # Install dependencies
             - run: pnpm install
             # Build the slides to /dist
-            - run: pnpm slidev build --out dist --base $(basename $GITHUB_REPOSITORY)
+            - run: pnpm slidev build --out dist --base /${{github.event.repository.name}}/
+            # Setup Pages configuration
+            - name: Setup Pages
+              uses: actions/configure-pages@v4
             # Upload the built slides to the artifact store
             - uses: actions/upload-pages-artifact@v3
               with:
                   path: dist
+
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        needs: build
+        runs-on: ubuntu-latest
+        name: Deploy
+        steps:
             # Deploy the slides to GitHub Pages
-            - uses: actions/deploy-pages@v4
+            - name: Deploy to GitHub Pages
               id: deployment
+              uses: actions/deploy-pages@v4

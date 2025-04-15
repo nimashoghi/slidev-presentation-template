@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref, onMounted, onBeforeUnmount, watch} from "vue"
+import {computed, onBeforeUnmount, onMounted, ref, watch} from "vue"
 
 const props = defineProps({
     src: {
@@ -16,7 +16,7 @@ const props = defineProps({
     },
     height: {
         type: String,
-        default: "360px",
+        default: null,
     },
     fontSize: {
         type: Number,
@@ -36,6 +36,22 @@ const props = defineProps({
 const plotDiv = ref(null)
 const figure = ref(null)
 const resizeObserver = ref(null)
+
+// Create a proper URL that accounts for the base path
+const resolvedSrc = computed(() => {
+    // If src starts with 'http' or '//', it's already a full URL
+    if (props.src.match(/^(https?:)?\/\//)) {
+        return props.src
+    }
+
+    // If src starts with '/', it's a root-relative path that needs the base
+    if (props.src.startsWith("/")) {
+        return `${import.meta.env.BASE_URL}${props.src.slice(1)}`
+    }
+
+    // Relative path (no leading slash)
+    return props.src
+})
 
 // For the color scheme
 const colorscheme = computed(() => {
@@ -124,7 +140,8 @@ const initPlot = async () => {
         // Dynamically import Plotly only when needed
         const Plotly = await import("plotly.js-dist-min")
 
-        const response = await fetch(props.src)
+        // Use the resolved source URL that includes the base path
+        const response = await fetch(resolvedSrc.value)
         const data = await response.json()
         figure.value = updatePlotConfig(data, container)
 
