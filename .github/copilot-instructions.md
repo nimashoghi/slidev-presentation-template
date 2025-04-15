@@ -463,6 +463,47 @@ Display an image with a professional caption:
   - `color`: Caption styling using Neversink colors.
   - `type`: Set to `"video"` for video content.
 
+#### Example: `PlotlyFigure` Component
+Present interactive data visualizations with Plotly charts:
+```markdown
+<PlotlyFigure
+  src="/data/temperature-chart.json"
+  caption="Figure 2: Interactive temperature fluctuations over time during the experiment."
+  class="w-4/5"
+  height="400px"
+  color="emerald-light"
+/>
+```
+
+- **Props**:
+  - `src`: URL to a JSON file containing Plotly figure data (required).
+  - `caption`: Descriptive text below the chart.
+  - `width`: Width of the component (defaults to 100%).
+  - `height`: Height of the plot area (default: `"360px"`).
+  - `fontSize`: Font size for plot elements like axis labels (default: `12`).
+  - `color`: Caption styling using Neversink colors.
+  - `class`: Tailwind classes for styling.
+
+The `src` JSON file should follow the standard Plotly figure format with `data` and `layout` properties:
+```json
+{
+  "data": [
+    {
+      "x": [1, 2, 3, 4],
+      "y": [10, 15, 13, 17],
+      "type": "scatter",
+      "mode": "lines+markers",
+      "name": "Series 1"
+    }
+  ],
+  "layout": {
+    "title": "Sample Plot",
+    "xaxis": { "title": "X Axis" },
+    "yaxis": { "title": "Y Axis" }
+  }
+}
+```
+
 #### Example: `StickyNote` Component
 Add a side note:
 ```markdown
