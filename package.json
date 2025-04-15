@@ -10,11 +10,15 @@
   "dependencies": {
     "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
+    "plotly.js-dist-min": "latest",
     "slidev-theme-neversink": "latest",
     "vue": "latest"
   },
   "devDependencies": {
-    "prettier": "latest"
+    "@types/plotly.js-dist-min": "latest",
+    "prettier": "latest",
+    "prettier-plugin-slidev": "latest",
+    "typescript": "latest"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

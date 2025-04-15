@@ -417,6 +417,18 @@ Mention that videos play inline - no fullscreen mode needed
 -->
 
 ---
+layout: default
+---
+
+# Plotly Figure
+
+<PlotlyFigure
+  src="/figure.json"
+  caption="This is a caption for the Plotly chart"
+  class="w-full md:w-2/3"
+/>
+
+---
 layout: end
 color: navy-light
 ---

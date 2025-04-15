@@ -14,6 +14,9 @@ importers:
       '@slidev/theme-default':
         specifier: latest
         version: 0.25.0
+      plotly.js-dist-min:
+        specifier: latest
+        version: 3.0.1
       slidev-theme-neversink:
         specifier: latest
         version: 0.3.6(@nuxt/kit@3.16.2)(@vue/compiler-sfc@3.5.13)(markdown-it@14.1.0)(postcss@8.5.3)(rollup@4.40.0)(typescript@5.8.3)(vite@6.2.6(@types/node@18.19.86)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.3))
@@ -21,9 +24,18 @@ importers:
         specifier: latest
         version: 3.5.13(typescript@5.8.3)
     devDependencies:
+      '@types/plotly.js-dist-min':
+        specifier: latest
+        version: 2.3.4
       prettier:
         specifier: latest
         version: 3.5.3
+      prettier-plugin-slidev:
+        specifier: latest
+        version: 1.0.5(prettier@3.5.3)
+      typescript:
+        specifier: latest
+        version: 5.8.3
 
 packages:
 
@@ -787,6 +799,10 @@ packages:
     resolution: {integrity: sha512-8Qfl3686fSaFdEVr2cnEeGjqBFw8ptaLxwCTozbgnl0n8W7kiTeWSk0FGrA3Oqth6Q4pKwBUBl5AADud1BpKlg==}
     engines: {node: '>=18.0.0'}
 
+  '@slidev/parser@0.47.5':
+    resolution: {integrity: sha512-KvqOEhIFuMDu8CjAsehMNKlAnnmAn2TRHiEymc3CMadid05oWa5zgTxqEyMxUl2rjWpYs3A1yDiendZsGYs3HA==}
+    engines: {node: '>=18.0.0'}
+
   '@slidev/parser@51.5.0':
     resolution: {integrity: sha512-0fPtOPhGYiuxUDWM13Y2C/gpjnLcx+zrzKaYZecFXbKHOQeVqk24YAhXPpugHcr6p737vvbUNP/SItyAp7ch9A==}
     engines: {node: '>=18.0.0'}
@@ -939,6 +955,12 @@ packages:
 
   '@types/node@18.19.86':
     resolution: {integrity: sha512-fifKayi175wLyKyc5qUfyENhQ1dCNI1UNjp653d8kuYcPQN5JhX3dGuP/XmvPTg/xRBn1VTLpbmi+H/Mr7tLfQ==}
+
+  '@types/plotly.js-dist-min@2.3.4':
+    resolution: {integrity: sha512-ISwLFV6Zs/v3DkaRFLyk2rvYAfVdnYP2VVVy7h+fBDWw52sn7sMUzytkWiN4M75uxr1uz1uiBioePTDpAfoFIg==}
+
+  '@types/plotly.js@2.35.5':
+    resolution: {integrity: sha512-9xczlf0FBsYXlUfKX4OsKBQs4d6CPRuRpfXXi5lp276yHi1BaI+FiVq6jXwt7JlDq84nMjWWU5LIN2Rpeg+vhg==}
 
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
@@ -2518,6 +2540,9 @@ packages:
   plantuml-encoder@1.4.0:
     resolution: {integrity: sha512-sxMwpDw/ySY1WB2CE3+IdMuEcWibJ72DDOsXLkSmEaSzwEUaYBT6DWgOfBiHGCux4q433X6+OEFWjlVqp7gL6g==}
 
+  plotly.js-dist-min@3.0.1:
+    resolution: {integrity: sha512-RReOqr6TfoHaTbVAoHR1UbTCOSRDsQ7Hbthd+3XAxOwaKmxCE3oejMhLG7urQSqWC65DAcSKV23kZd8e+7mG7w==}
+
   points-on-curve@0.2.0:
     resolution: {integrity: sha512-0mYKnYYe9ZcqMCWhUjItv/oHjvgEsfKvnUTg8sAtnHr3GVy7rGkXCb6d5cSyqrWqL4k81b9CPg3urd+T7aop3A==}
 
@@ -2543,6 +2568,11 @@ packages:
 
   pptxgenjs@3.12.0:
     resolution: {integrity: sha512-ZozkYKWb1MoPR4ucw3/aFYlHkVIJxo9czikEclcUVnS4Iw/M+r+TEwdlB3fyAWO9JY1USxJDt0Y0/r15IR/RUA==}
+
+  prettier-plugin-slidev@1.0.5:
+    resolution: {integrity: sha512-1xaKzOAX17QAcn1roUgQIAfeio3HPYYefCgzxh6Bzk+5rJJxq0I8HUhLrUyv9nCpIP6e9CDv/yDQSdEeqqRUuA==}
+    peerDependencies:
+      prettier: ^3.2.4
 
   prettier@3.5.3:
     resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
@@ -4079,6 +4109,11 @@ snapshots:
       - vue-template-compiler
       - vue-template-es2015-compiler
 
+  '@slidev/parser@0.47.5':
+    dependencies:
+      '@slidev/types': 0.47.5
+      js-yaml: 4.1.0
+
   '@slidev/parser@51.5.0(@nuxt/kit@3.16.2)(@vue/compiler-sfc@3.5.13)(markdown-it-async@2.2.0)(postcss@8.5.3)(typescript@5.8.3)(vite@6.2.6(@types/node@18.19.86)(jiti@2.4.2)(tsx@4.19.3)(yaml@2.7.1))':
     dependencies:
       '@antfu/utils': 9.2.0
@@ -4331,6 +4366,12 @@ snapshots:
   '@types/node@18.19.86':
     dependencies:
       undici-types: 5.26.5
+
+  '@types/plotly.js-dist-min@2.3.4':
+    dependencies:
+      '@types/plotly.js': 2.35.5
+
+  '@types/plotly.js@2.35.5': {}
 
   '@types/trusted-types@2.0.7':
     optional: true
@@ -6287,6 +6328,8 @@ snapshots:
 
   plantuml-encoder@1.4.0: {}
 
+  plotly.js-dist-min@3.0.1: {}
+
   points-on-curve@0.2.0: {}
 
   points-on-path@0.2.1:
@@ -6323,6 +6366,11 @@ snapshots:
       https: 1.0.0
       image-size: 1.2.1
       jszip: 3.10.1
+
+  prettier-plugin-slidev@1.0.5(prettier@3.5.3):
+    dependencies:
+      '@slidev/parser': 0.47.5
+      prettier: 3.5.3
 
   prettier@3.5.3: {}
 
