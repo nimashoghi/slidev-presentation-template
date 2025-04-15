@@ -57,6 +57,9 @@ jobs:
             # Install playwright-chromium specifically for PDF/PPTX export
             - name: Install playwright-chromium
               run: pnpm add -D playwright-chromium
+            # Install Playwright browsers (specifically Chromium)
+            - name: Install Playwright browsers
+              run: pnpm exec playwright install chromium
             # Install system dependencies for Playwright
             - name: Install Playwright system dependencies
               run: npx playwright install-deps chromium
