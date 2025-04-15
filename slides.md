@@ -429,18 +429,6 @@ layout: default
 />
 
 ---
-layout: default
----
-
-# D3 Figure
-
-<D3Figure
-  src="/data/bar-chart.js"
-  caption="A simple bar chart using D3.js"
-  class="w-full md:w-2/3"
-/>
-
----
 layout: end
 color: navy-light
 ---
