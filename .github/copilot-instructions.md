@@ -482,6 +482,8 @@ Here are some standout components for academic use:
 - **`QRCode`**: A scannable code linking to external resources.
 - **`SpeechBubble`**: A bubble for quotes or commentary.
 - **`Kawaii`**: Playful characters for visual appeal.
+- **`Cite`**: In-text citations with interactive hover tooltips.
+- **`BiblioList`**: A formatted bibliography or reference list.
 
 Each component is customizable via props, letting you tailor its appearance and behavior.
 
@@ -630,6 +632,73 @@ This pairs a diagram with a matching sticky note, enhancing the slide’s clarit
 - **Positioning**: For precise placement, add `v-drag` (e.g., `<StickyNote v-drag>`), ensuring a fixed `width`.
 
 Neversink components enrich your slides with minimal effort, keeping Markdown at the core of your workflow.
+
+### Academic Citations with Cite and BiblioList
+
+Academic presentations often require proper citation of sources. Neversink provides specialized components to handle citations elegantly.
+
+#### Setting Up Bibliographies
+
+1. Create a BibTeX file (e.g., `reference.bib`) in your `public` folder containing your bibliography entries:
+
+```bibtex
+@article{smith2023,
+  author  = {Smith, John and Johnson, Emily},
+  title   = {Recent Advances in Academic Presentations},
+  journal = {Journal of Educational Technology},
+  year    = {2023},
+  volume  = {42},
+  pages   = {128-142}
+}
+```
+
+2. Configure citation settings in your global frontmatter:
+
+```yaml
+---
+theme: neversink
+biblio:
+    numericalRefs: false # Use false for author-date format, true for numbered citations
+    defaultBibFile: "/reference.bib"
+---
+```
+
+#### Adding In-Text Citations
+
+Use the `Cite` component to add citations within your text:
+
+```markdown
+Recent studies <Cite citeKey="smith2023" /> demonstrate the effectiveness of this approach.
+```
+
+This renders a citation that, when hovered over, displays the full reference details.
+
+You can also use custom text within the citation:
+
+```markdown
+<Cite citeKey="smith2023">Smith et al. (2023)</Cite> found significant improvements.
+```
+
+#### Citation Styles
+
+Neversink supports two primary citation styles:
+
+1. **Author-Date** (default): `<Cite citeKey="smith2023" />` renders as `[Smith & Johnson, 2023]`
+2. **Numerical**: When `numericalRefs: true` is set, citations appear as `[1]`, `[2]`, etc.
+
+#### Creating Bibliography Slides
+
+Add a reference list to your presentation with the `BiblioList` component:
+
+```markdown
+---
+layout: default
+---
+
+# References
+
+<BiblioList />
+```
 
 ## 7. Examples and Best Practices
 
