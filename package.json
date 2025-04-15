@@ -5,7 +5,8 @@
   "scripts": {
     "build": "slidev build --out dist",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "auto-export": "node scripts/auto-export.js"
   },
   "dependencies": {
     "@slidev/cli": "latest",

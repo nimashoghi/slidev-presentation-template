@@ -42,11 +42,44 @@ jobs:
               with:
                   path: dist
 
+    export:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            # Install dependencies
+            - run: pnpm install
+            # Run auto-export script to generate PDF/PPTX files
+            - name: Generate PDF and PPTX exports
+              run: pnpm auto-export
+            # Upload the exports as artifacts
+            - name: Upload export artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                  name: slidev-exports
+                  path: exports/
+                  retention-days: 7
+            # Add exports to the GitHub Pages artifact so they're available in the deployment
+            - name: Copy exports to dist directory
+              run: |
+                  pnpm slidev build --out dist --base /${{github.event.repository.name}}/
+                  mkdir -p dist/exports
+                  cp -r exports/* dist/exports/ || true
+            - uses: actions/upload-pages-artifact@v3
+              with:
+                  path: dist
+                  name: github-pages-with-exports
+
     deploy:
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
-        needs: build
+        needs: [build, export]
         runs-on: ubuntu-latest
         name: Deploy
         steps:
@@ -54,3 +87,5 @@ jobs:
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
+              with:
+                  artifact_name: github-pages-with-exports
