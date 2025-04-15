@@ -2,7 +2,6 @@
 theme: neversink
 title: Advanced Research Methods
 titleTemplate: "%s - Academic Presentation"
-mdc: true
 transition: slide-left
 layout: cover
 color: navy-light

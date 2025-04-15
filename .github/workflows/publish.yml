@@ -59,7 +59,7 @@ jobs:
               run: pnpm auto-export
             # Upload the exports as artifacts
             - name: Upload export artifacts
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: slidev-exports
                   path: exports/
