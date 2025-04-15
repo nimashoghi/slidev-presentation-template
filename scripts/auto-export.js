@@ -113,7 +113,7 @@ async function exportSlides() {
         }
 
         try {
-            execSync(`npx slidev export ${pdfOptions.join(" ")}`, {
+            execSync(`npx slidev export --wait 1000 ${pdfOptions.join(" ")}`, {
                 stdio: "inherit",
             })
             console.log(
@@ -134,9 +134,12 @@ async function exportSlides() {
         ]
 
         try {
-            execSync(`npx slidev export ${pptxOptions.join(" ")}`, {
-                stdio: "inherit",
-            })
+            execSync(
+                `npx slidev export --wait 1000 ${pptxOptions.join(" ")}`,
+                {
+                    stdio: "inherit",
+                },
+            )
             console.log(
                 `PPTX exported to ${path.join(config.outputDir, `${baseFilename}.pptx`)}`,
             )
