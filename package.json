@@ -9,6 +9,10 @@
     "auto-export": "node scripts/auto-export.js"
   },
   "dependencies": {
+    "@citation-js/core": "latest",
+    "@citation-js/plugin-bibtex": "latest",
+    "@citation-js/plugin-csl": "latest",
+    "@citation-js/plugin-doi": "latest",
     "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
     "plotly.js-dist-min": "latest",

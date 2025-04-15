@@ -427,6 +427,24 @@ layout: default
 />
 
 ---
+layout: default
+---
+
+# Citation Example
+
+Hello!
+
+<Cite citeKey="vaswani2017attention" />
+
+---
+layout: default
+---
+
+# Bibliography
+
+<BiblioList />
+
+---
 layout: end
 color: navy-light
 ---
