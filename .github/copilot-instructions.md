@@ -478,12 +478,14 @@ Here are some standout components for academic use:
 
 - **`Admonition`**: A styled box for notes, tips, or warnings.
 - **`Figure`**: A consistent way to display images and videos with captions.
+- **`PlotlyFigure`**: For interactive data visualizations using Plotly charts.
 - **`StickyNote`**: A note-like element for annotations.
 - **`QRCode`**: A scannable code linking to external resources.
 - **`SpeechBubble`**: A bubble for quotes or commentary.
 - **`Kawaii`**: Playful characters for visual appeal.
 - **`Cite`**: In-text citations with interactive hover tooltips.
 - **`BiblioList`**: A formatted bibliography or reference list.
+- **`Bluefish`**: For interactive diagrams using the Bluefish framework.
 
 Each component is customizable via props, letting you tailor its appearance and behavior.
 
@@ -625,6 +627,24 @@ Sensor A failed twice during initial tests.
 
 This pairs a diagram with a matching sticky note, enhancing the slide’s clarity.
 
+#### Example: `Bluefish` Component
+
+```markdown
+<Bluefish src="/data/diagram.js" />
+```
+
+or
+
+```markdown
+<Bluefish :app='(bf) => bf.Text("Hello World")' />
+```
+
+- **Props**:
+    - `src`: URL to a JavaScript file containing the Bluefish diagram data.
+    - `app`: A function that returns a Bluefish app instance.
+
+Please refer to the "Bluefish Diagramming Framework Cheat Sheet" section for more details on using Bluefish.
+
 ### Tips for Effective Component Use
 
 - **Consistency**: Align component colors with your slide’s `color` setting.
@@ -699,6 +719,122 @@ layout: default
 
 <BiblioList />
 ```
+
+### Bluefish Diagramming Framework Cheat Sheet
+
+#### Introduction
+
+Bluefish is a diagramming framework that uses **relations** as its primary building blocks. Unlike traditional UI components, relations can share children with other relations and don't need to fully specify their children's layouts.
+
+#### Core Concepts
+
+- **Marks**: Basic visual elements (similar to SVG primitives)
+- **Relations**: Visual arrangements of elements
+- **Declarative References**: Allow elements to be referenced and used in multiple relations
+
+#### Component Reference
+
+##### Marks
+
+| Mark | Description |
+|------|-------------|
+| `Circle({ r, fill, stroke, stroke-width, name })` | Circle with radius `r` |
+| `Ellipse({ rx, ry, fill, stroke })` | Ellipse with x-radius `rx` and y-radius `ry` |
+| `Image({ src, width, height })` | Image loaded from `src` |
+| `Path({ d, fill, stroke })` | SVG path with data `d` |
+| `Rect({ width, height, fill, stroke, rx, ry })` | Rectangle with optional rounded corners |
+| `Text({ name }, "content")` | Text element with content |
+
+##### Relations
+
+| Relation | Description |
+|----------|-------------|
+| `Align({ alignment })` | Aligns elements according to specified alignment (e.g., "centerX") |
+| `Arrow([from, to])` | Draws an arrow from first element to second element |
+| `Background({ padding, fill, stroke, rx }, element)` | Adds background with padding around element |
+| `Distribute({ direction, spacing })` | Evenly distributes elements with specified spacing |
+| `Group([elements])` | Groups elements without layout constraints |
+| `Line([elements])` | Connects elements with lines |
+| `StackH({ spacing }, [elements])` | Horizontally stacks elements with spacing |
+| `StackV({ spacing }, [elements])` | Vertically stacks elements with spacing |
+
+##### Special Components
+
+| Component | Description |
+|-----------|-------------|
+| `Bluefish` | Defines the region controlled by Bluefish |
+| `Ref({ select: "name" })` | References a named element for use in another relation |
+| `withBluefish(fn)` | Wraps custom mark and relation definitions |
+| `Layout` | Low-level API for defining custom layouts |
+
+#### Using References
+
+References allow elements to be shared between relations:
+
+```js
+// Name an element
+Circle({ name: "planet", r: 15, fill: "blue" })
+
+// Reference it elsewhere
+Ref({ select: "planet" })
+```
+
+#### Examples
+
+##### Basic Planet Diagram
+
+```js
+[
+  Background(
+    { padding: 40, fill: "#859fc9", stroke: "none" },
+    StackH({ spacing: 50 }, [
+      Circle({ name: "mercury", r: 15, fill: "#EBE3CF", "stroke-width": 3, stroke: "black" }),
+      Circle({ r: 36, fill: "#DC933C", "stroke-width": 3, stroke: "black" }),
+      Circle({ r: 38, fill: "#179DD7", "stroke-width": 3, stroke: "black" }),
+      Circle({ r: 21, fill: "#F1CF8E", "stroke-width": 3, stroke: "black" }),
+    ])
+  ),
+  Background({ rx: 10 }, 
+    StackV({ spacing: 30 }, [
+      Text("Mercury"), 
+      Ref({ select: "mercury" })
+    ])
+  ),
+]
+```
+
+##### Planet with Label and Arrow
+
+```js
+[
+  Background({ name: "planets", padding: 40, fill: "#859fc9", stroke: "none" }, [
+    StackH({ spacing: 50 }, [
+      Circle({ name: "mercury", r: 15, fill: "#EBE3CF", "stroke-width": 3, stroke: "black" }),
+      // More planets...
+    ]),
+  ]),
+  Distribute({ direction: "vertical", spacing: 30 }, [
+    Ref({ select: "planets" }),
+    Text({ name: "label" }, "Mercury"),
+  ]),
+  Align({ alignment: "centerX" }, [
+    Ref({ select: "mercury" }), 
+    Ref({ select: "label" })
+  ]),
+  Arrow([
+    Ref({ select: "label" }), 
+    Ref({ select: "mercury" })
+  ]),
+]
+```
+
+#### Key Features
+
+1. **Component Composition**: Build complex diagrams from simpler building blocks
+2. **Declarative References**: Reference elements across different relations
+3. **Flexible Layouts**: Position elements using relations rather than absolute coordinates
+
+Bluefish's approach allows you to focus on the relationships between elements rather than their absolute positions, making it easier to create and maintain complex diagrams.
 
 ## 7. Examples and Best Practices
 

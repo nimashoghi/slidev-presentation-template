@@ -15,6 +15,7 @@
     "@citation-js/plugin-doi": "latest",
     "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
+    "bluefish-js": "latest",
     "plotly.js-dist-min": "latest",
     "slidev-theme-neversink": "latest",
     "vue": "latest"
