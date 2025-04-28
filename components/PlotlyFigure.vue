@@ -1,4 +1,5 @@
 <script setup>
+import {pathPrefix} from "@slidev/client"
 import {computed, onBeforeUnmount, onMounted, ref, watch} from "vue"
 
 const props = defineProps({
@@ -46,7 +47,7 @@ const resolvedSrc = computed(() => {
 
     // If src starts with '/', it's a root-relative path that needs the base
     if (props.src.startsWith("/")) {
-        return `${import.meta.env.BASE_URL}${props.src.slice(1)}`
+        return `${pathPrefix}${props.src.slice(1)}`
     }
 
     // Relative path (no leading slash)

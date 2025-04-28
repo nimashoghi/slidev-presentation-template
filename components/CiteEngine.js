@@ -1,8 +1,9 @@
-import {ref} from "vue"
 import {Cite} from "@citation-js/core"
 import "@citation-js/plugin-bibtex"
 import "@citation-js/plugin-csl"
 import "@citation-js/plugin-doi"
+import {pathPrefix} from "@slidev/client"
+import {ref} from "vue"
 
 export const citationState = {
     defaultConfig: {
@@ -38,7 +39,7 @@ export const citationState = {
 
         // If src starts with '/', it's a root-relative path that needs the base
         if (src.startsWith("/")) {
-            return `${import.meta.env.BASE_URL}${src.slice(1)}`
+            return `${pathPrefix}${src.slice(1)}`
         }
 
         // Relative path (no leading slash)
