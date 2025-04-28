@@ -448,7 +448,7 @@ layout: default
 layout: default
 ---
 
-# Bluefish Diagram Example
+# Bluefish Diagram Example (`:app`)
 
 ## `:app` Version
 
@@ -490,9 +490,19 @@ layout: default
     ),
   ]' />
 
-## `src` Version
+---
+layout: default
+---
 
-<Bluefish src="./js/bluefish-figure.js" />
+# Bluefish Diagram Example (`src`)
+
+## `src` Version (Absolute)
+
+<Bluefish src="/bluefish/figure.js" />
+
+## `src` Version (Relative)
+
+<Bluefish src="figure.js" />
 
 ---
 layout: end
