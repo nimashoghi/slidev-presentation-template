@@ -15,13 +15,17 @@
     "@citation-js/plugin-doi": "latest",
     "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
-    "bluefish-js": "latest",
     "plotly.js-dist-min": "latest",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "slidev-addon-react": "^1.1.3",
     "slidev-theme-neversink": "latest",
     "vue": "latest"
   },
   "devDependencies": {
     "@types/plotly.js-dist-min": "latest",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "prettier": "latest",
     "prettier-plugin-slidev": "latest",
     "typescript": "latest"
