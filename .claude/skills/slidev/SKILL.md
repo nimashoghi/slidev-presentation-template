@@ -200,23 +200,36 @@ Props: primitives passed directly (`title="Hello"`), objects/arrays use Vue bind
 
 ### Figure
 
-Image or video with caption and optional progress bar. See [docs/components/figure.md](docs/components/figure.md) for advanced usage.
+Image or video with caption, credits, and optional progress bar. See [docs/components/figure.md](docs/components/figure.md) for advanced usage.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `src` | String | (required) | Image/video source URL |
 | `caption` | String | `''` | Caption text below media |
+| `captionType` | String | `text` | `text` (plain) or `template` (slot-based rich caption) |
+| `credits` | String | `''` | Inline credits text appended to caption |
+| `creditsCiteKey` | String | `''` | BibTeX cite key for inline citation credit |
 | `type` | String | `image` | `image` or `video` |
-| `autostart` | Boolean | `false` | Auto-play video |
-| `repeat` | Boolean | `false` | Loop video |
+| `autostart` | Boolean | `false` | Auto-play video (with `pauseStart` delay) |
+| `repeat` | Boolean | `false` | Loop video (pauses on first/last frames) |
 | `progress` | Boolean | `false` | Show video progress bar |
+| `pauseStart` | Number | `1500` | Ms to pause on first frame before playing |
+| `pauseEnd` | Number | `2000` | Ms to pause on last frame before looping |
 | `color` | String | `light` | Caption color scheme |
 | `class` | String | `''` | Tailwind classes |
 
 ```md
 <Figure src="/images/result.png" caption="Figure 1: Results" class="w-4/5" color="emerald-light" />
 
+<Figure src="/images/diagram.png" caption="Architecture" creditsCiteKey="smith2023" class="w-2/3" />
+
 <Figure type="video" src="/videos/demo.mp4" caption="Video 1" class="w-2/3" progress autostart repeat />
+
+<Figure src="/images/chart.png" captionType="template">
+  <template #caption>
+    <p>Results from <strong>Experiment 1</strong>. See <Cite citeKey="jones2024" /> for details.</p>
+  </template>
+</Figure>
 ```
 
 ### PlotlyFigure

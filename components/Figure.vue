@@ -1,5 +1,6 @@
 <script setup>
 import {computed, ref, onMounted, watch} from "vue"
+import Cite from "./Cite.vue"
 
 const props = defineProps({
     src: {
@@ -7,6 +8,19 @@ const props = defineProps({
         required: true,
     },
     caption: {
+        type: String,
+        default: "",
+    },
+    captionType: {
+        type: String,
+        default: "text", // 'text' or 'template'
+        validator: (value) => ["text", "template"].includes(value),
+    },
+    credits: {
+        type: String,
+        default: "",
+    },
+    creditsCiteKey: {
         type: String,
         default: "",
     },
@@ -31,6 +45,14 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    pauseStart: {
+        type: Number,
+        default: 1500, // ms to pause on the first frame before playing
+    },
+    pauseEnd: {
+        type: Number,
+        default: 2000, // ms to pause on the last frame before looping
+    },
     color: {
         type: String,
         default: "light",
@@ -45,6 +67,7 @@ const props = defineProps({
 const videoRef = ref(null)
 const progressValue = ref(0)
 const isPlaying = ref(false)
+let pauseTimer = null
 
 // For the color scheme
 const colorscheme = computed(() => {
@@ -62,7 +85,13 @@ const containerStyle = computed(() => {
 
 // Determine if we need to apply the figure container styling
 const usesFigureStyling = computed(() => {
-    return !!props.caption || props.progress
+    return (
+        !!props.caption ||
+        !!props.credits ||
+        !!props.creditsCiteKey ||
+        props.progress ||
+        props.captionType === "template"
+    )
 })
 
 // Update progress bar when video is playing
@@ -86,44 +115,69 @@ const togglePlay = () => {
     }
 }
 
+// Start playback with pause-at-start delay
+const startWithPause = () => {
+    const video = videoRef.value
+    if (!video) return
+
+    video.currentTime = 0
+    video.pause()
+
+    pauseTimer = setTimeout(() => {
+        video.play()
+        isPlaying.value = true
+    }, props.pauseStart)
+}
+
 // Set up video element after mounting
 onMounted(() => {
     if (props.type === "video" && videoRef.value) {
-        // Set autoplay and loop attributes if needed
-        if (props.autostart) {
-            videoRef.value.autoplay = true
-            isPlaying.value = true
-        }
+        const video = videoRef.value
 
-        if (props.repeat) {
-            videoRef.value.loop = true
-        }
+        // Never use native loop — we handle it manually with pauses
+        video.loop = false
 
         // Add event listeners for progress tracking
         if (props.progress) {
-            videoRef.value.addEventListener("timeupdate", updateProgress)
+            video.addEventListener("timeupdate", updateProgress)
         }
 
         // Add event listeners for play/pause state
-        videoRef.value.addEventListener("play", () => {
+        video.addEventListener("play", () => {
             isPlaying.value = true
         })
 
-        videoRef.value.addEventListener("pause", () => {
+        video.addEventListener("pause", () => {
             isPlaying.value = false
         })
 
-        videoRef.value.addEventListener("ended", () => {
+        // When video ends: pause on last frame, then loop back with start pause
+        video.addEventListener("ended", () => {
             isPlaying.value = false
-            if (props.progress) {
-                progressValue.value = 0
+            if (props.repeat) {
+                pauseTimer = setTimeout(() => {
+                    startWithPause()
+                }, props.pauseEnd)
+            } else {
+                if (props.progress) {
+                    progressValue.value = 100
+                }
             }
         })
+
+        // Autostart with initial pause
+        if (props.autostart) {
+            startWithPause()
+        }
     }
 })
 
-// Clean up event listeners
+// Clean up event listeners and timers
 const cleanupListeners = () => {
+    if (pauseTimer) {
+        clearTimeout(pauseTimer)
+        pauseTimer = null
+    }
     if (props.type === "video" && videoRef.value && props.progress) {
         videoRef.value.removeEventListener("timeupdate", updateProgress)
     }
@@ -136,6 +190,7 @@ watch(() => props.type, cleanupListeners)
 
 <template>
     <div
+        v-bind="$attrs"
         :class="[
             usesFigureStyling ? 'figure-container' : '',
             colorscheme,
@@ -177,8 +232,6 @@ watch(() => props.type, cleanupListeners)
                             : {}
                     "
                     @click="togglePlay"
-                    :autoplay="props.autostart"
-                    :loop="props.repeat"
                 ></video>
 
                 <!-- Progress bar for video -->
@@ -191,9 +244,29 @@ watch(() => props.type, cleanupListeners)
             </div>
         </div>
 
-        <!-- Caption -->
-        <div v-if="props.caption" class="figure-caption">
-            <p>{{ props.caption }}</p>
+        <!-- Caption with optional credits inline -->
+        <div
+            v-if="props.caption || props.captionType === 'template'"
+            class="figure-caption"
+        >
+            <!-- Text caption mode -->
+            <p v-if="props.captionType === 'text'">
+                {{ props.caption }}
+                <span v-if="props.credits" class="figure-credits-inline">
+                    {{ props.credits }}
+                </span>
+                <span
+                    v-else-if="props.creditsCiteKey"
+                    class="figure-credits-inline"
+                >
+                    <Cite :citeKey="props.creditsCiteKey" />
+                </span>
+            </p>
+
+            <!-- Template caption mode (custom HTML via slot) -->
+            <div v-else-if="props.captionType === 'template'">
+                <slot name="caption"></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -202,7 +275,7 @@ watch(() => props.type, cleanupListeners)
 .figure-container {
     font-family: var(--neversink-main-font);
     margin: 10px 0;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     border-radius: 6px;
     font-size: 0.85rem;
@@ -212,6 +285,8 @@ watch(() => props.type, cleanupListeners)
     width: 100%;
     background-color: white;
     position: relative;
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
 }
 
 .figure-content {
@@ -251,10 +326,19 @@ watch(() => props.type, cleanupListeners)
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 0 0 6px 6px;
     text-align: center;
+    overflow: visible;
+    position: relative;
 }
 
 .figure-caption p {
     margin: 0;
+}
+
+.figure-credits-inline {
+    margin-left: 0.25em;
+    font-size: 0.9em;
+    opacity: 0.8;
+    font-style: italic;
 }
 
 /* Styles for non-figure mode (when no caption or progress) */
