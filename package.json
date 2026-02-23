@@ -9,10 +9,6 @@
     "auto-export": "node scripts/auto-export.js"
   },
   "dependencies": {
-    "@citation-js/core": "latest",
-    "@citation-js/plugin-bibtex": "latest",
-    "@citation-js/plugin-csl": "latest",
-    "@citation-js/plugin-doi": "latest",
     "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
     "plotly.js-dist-min": "latest",
@@ -23,6 +19,10 @@
     "vue": "latest"
   },
   "devDependencies": {
+    "@citation-js/core": "latest",
+    "@citation-js/plugin-bibtex": "latest",
+    "@citation-js/plugin-csl": "latest",
+    "@citation-js/plugin-doi": "latest",
     "@types/plotly.js-dist-min": "latest",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
