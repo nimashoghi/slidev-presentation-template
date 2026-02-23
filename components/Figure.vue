@@ -69,6 +69,16 @@ const progressValue = ref(0)
 const isPlaying = ref(false)
 let pauseTimer = null
 
+// Resolve src against Vite's base URL so public/ assets work with --base subpaths
+const resolvedSrc = computed(() => {
+    const s = props.src
+    if (s && s.startsWith("/") && !s.startsWith("//")) {
+        const base = import.meta.env.BASE_URL || "/"
+        return base + s.slice(1)
+    }
+    return s
+})
+
 // For the color scheme
 const colorscheme = computed(() => {
     return `neversink-${props.color}-scheme`
@@ -202,7 +212,7 @@ watch(() => props.type, cleanupListeners)
             <!-- Image content -->
             <img
                 v-if="props.type === 'image'"
-                :src="props.src"
+                :src="resolvedSrc"
                 :class="[
                     usesFigureStyling ? 'figure-content' : '',
                     !usesFigureStyling ? props.class : '',
@@ -221,7 +231,7 @@ watch(() => props.type, cleanupListeners)
             >
                 <video
                     ref="videoRef"
-                    :src="props.src"
+                    :src="resolvedSrc"
                     :class="[
                         usesFigureStyling ? 'figure-content' : '',
                         !usesFigureStyling ? props.class : '',
