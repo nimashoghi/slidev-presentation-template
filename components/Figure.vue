@@ -57,6 +57,14 @@ const props = defineProps({
         type: String,
         default: "light",
     },
+    cropTop: {
+        type: [Number, String],
+        default: 0, // percentage to crop from top
+    },
+    cropBottom: {
+        type: [Number, String],
+        default: 0, // percentage to crop from bottom
+    },
     class: {
         type: [String, Array, Object],
         default: "",
@@ -102,6 +110,19 @@ const usesFigureStyling = computed(() => {
         props.progress ||
         props.captionType === "template"
     )
+})
+
+// Computed style for cropping (negative margins + overflow hidden on wrapper)
+const hasCrop = computed(() => {
+    return Number(props.cropTop) !== 0 || Number(props.cropBottom) !== 0
+})
+
+const cropStyle = computed(() => {
+    if (!hasCrop.value) return {}
+    return {
+        marginTop: `-${props.cropTop}%`,
+        marginBottom: `-${props.cropBottom}%`,
+    }
 })
 
 // Update progress bar when video is playing
@@ -208,7 +229,7 @@ watch(() => props.type, cleanupListeners)
         ]"
         :style="usesFigureStyling ? containerStyle : {}"
     >
-        <div :class="{'figure-content-wrapper': usesFigureStyling}">
+        <div :class="{'figure-content-wrapper': usesFigureStyling, 'crop-wrapper': hasCrop}">
             <!-- Image content -->
             <img
                 v-if="props.type === 'image'"
@@ -217,11 +238,12 @@ watch(() => props.type, cleanupListeners)
                     usesFigureStyling ? 'figure-content' : '',
                     !usesFigureStyling ? props.class : '',
                 ]"
-                :style="
-                    !usesFigureStyling && props.width
+                :style="{
+                    ...(!usesFigureStyling && props.width
                         ? {width: props.width}
-                        : {}
-                "
+                        : {}),
+                    ...cropStyle,
+                }"
             />
 
             <!-- Video content -->
@@ -297,6 +319,10 @@ watch(() => props.type, cleanupListeners)
     position: relative;
     overflow: hidden;
     border-radius: 6px 6px 0 0;
+}
+
+.crop-wrapper {
+    overflow: hidden;
 }
 
 .figure-content {
